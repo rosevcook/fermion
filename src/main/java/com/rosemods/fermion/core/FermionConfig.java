@@ -22,22 +22,23 @@ public class FermionConfig {
         public final ConfigValue<Boolean> smoothStone;
         @ConfigKey("brick_walls")
         public final ConfigValue<Boolean> brickWalls;
+        @ConfigKey("deepslate")
+        public final ConfigValue<Boolean> deepslate;
         @ConfigKey("waxed_concrete_powder")
         public final ConfigValue<Boolean> waxedConcretePowder;
 
         private Common(ForgeConfigSpec.Builder builder) {
             builder.push("Building Blocks");
-            builder.push("Block Set Extensions");
+            this.waxedConcretePowder = builder.comment("Should you be able to wax Concrete Powder to stop its gravity and ability to convert in water.").define("Waxed Concrete Powder", true);
 
+            builder.push("Block Set Extensions");
             this.smoothBasalt = builder.comment("Should Smooth Basalt have a full Block Set.").define("Smooth Basalt Block Set", true);
             this.endStone = builder.comment("Should End Stone have a full Block Set.").define("End Stone Block Set", true);
             this.smoothStone = builder.comment("Should Smooth Stone have a Stair variant.").define("Smooth Stone Block Set", true);
+            this.deepslate = builder.comment("Should Polished Deepslate Pressure Plates and Buttons be added.").define("Deepslate Complete Set", true);
             this.brickWalls = builder.comment("Should Brick Blocks with no Wall Block be given one.").define("Brick Walls", true);
 
             builder.pop();
-
-            this.waxedConcretePowder  =builder.comment("Should you be able to wax Concrete Powder to stop its gravity and ability to convert in water.").define("Waxed Concrete Powder", true);
-
             builder.pop();
         }
 

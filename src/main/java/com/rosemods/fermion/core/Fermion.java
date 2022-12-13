@@ -2,6 +2,7 @@ package com.rosemods.fermion.core;
 
 import com.rosemods.fermion.core.data.client.FermionLanguageProvider;
 import com.rosemods.fermion.core.data.client.FermionModelProvider;
+import com.rosemods.fermion.core.data.server.FermionRecipeProvider;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
@@ -52,5 +53,7 @@ public class Fermion {
 
         gen.addProvider(client, new FermionLanguageProvider(event));
         gen.addProvider(client, new FermionModelProvider(event));
+
+        gen.addProvider(server, new FermionRecipeProvider(event));
     }
 }

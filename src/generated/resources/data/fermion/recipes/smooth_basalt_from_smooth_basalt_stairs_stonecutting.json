@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "minecraft:smooth_basalt"
+  },
+  "result": "fermion:smooth_basalt_stairs"
+}
