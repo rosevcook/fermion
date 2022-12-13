@@ -1,6 +1,8 @@
 package com.rosemods.fermion.core;
 
 import com.rosemods.fermion.core.data.client.FermionLanguageProvider;
+import com.rosemods.fermion.core.data.client.FermionModelProvider;
+import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +32,7 @@ public class Fermion {
 
         MinecraftForge.EVENT_BUS.register(this);
 
+        DataUtil.registerConfigCondition(MODID, FermionConfig.COMMON);
         context.registerConfig(ModConfig.Type.COMMON, FermionConfig.COMMON_SPEC);
         context.registerConfig(ModConfig.Type.CLIENT, FermionConfig.CLIENT_SPEC);
     }
@@ -48,5 +51,6 @@ public class Fermion {
         boolean server = event.includeServer();
 
         gen.addProvider(client, new FermionLanguageProvider(event));
+        gen.addProvider(client, new FermionModelProvider(event));
     }
 }
