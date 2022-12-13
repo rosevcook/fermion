@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = "https://github.com/rosevcook/fermion/issues"
+license = "https://github.com/rosevcook/fermion/blob/main/LICENSE.txt"
+
+[[mods]]
+    modId = "fermion"
+    version = "1.0.0"
+    displayName = "Fermion"
+    logoFile = "logo.png"
+    displayURL = "https://www.curseforge.com/minecraft/mc-mods/fermion"
+    authors = "Rose"
+    description = '''
+    
+    '''
+
+[[dependencies.fermion]]
+    modId = "forge"
+    mandatory = true
+    versionRange = "[43.1.1,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.fermion]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.19.2,)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.fermion]]
+    modId = "blueprint"
+    mandatory = true
+    versionRange = "[6.1.0,)"
+    ordering = "BEFORE"
+    side = "BOTH"
