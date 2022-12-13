@@ -1,5 +1,6 @@
 package com.rosemods.fermion.core;
 
+import com.rosemods.fermion.core.data.client.FermionLanguageProvider;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -45,5 +46,6 @@ public class Fermion {
         boolean client = event.includeClient();
         boolean server = event.includeServer();
 
+        gen.addProvider(client, new FermionLanguageProvider(event));
     }
 }
