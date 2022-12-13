@@ -24,10 +24,10 @@ public class FermionBlocks {
     public static final RegistryObject<Block> END_STONE_WALL = HELPER.createBlock("end_stone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> END_STONE_VERTICAL_SLAB = HELPER.createCompatBlock(FermionConstants.QUARK, "end_stone_vertical_slab", () -> new VerticalSlabBlock(BlockBehaviour.Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-    public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = HELPER.createBlock("end_stone_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = HELPER.createBlock("end_stone_stairs", () -> new StairBlock(Blocks.SMOOTH_BASALT::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> SMOOTH_BASALT_WALL = HELPER.createBlock("end_stone_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> SMOOTH_BASALT_VERTICAL_SLAB = HELPER.createCompatBlock("end_stone_vertical_slab", () -> new VerticalSlabBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> SMOOTH_BASALT_SLAB = HELPER.createBlock("smooth_basalt_slab", () -> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> SMOOTH_BASALT_STAIRS = HELPER.createBlock("smooth_basalt_stairs", () -> new StairBlock(Blocks.SMOOTH_BASALT::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> SMOOTH_BASALT_WALL = HELPER.createBlock("smooth_basalt_wall", () -> new WallBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> SMOOTH_BASALT_VERTICAL_SLAB = HELPER.createCompatBlock("smooth_basalt_vertical_slab", () -> new VerticalSlabBlock(BlockBehaviour.Properties.copy(Blocks.SMOOTH_BASALT)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
     public static final RegistryObject<Block> POLISHED_DEEPSLATE_PRESSURE_PLATE = HELPER.createInjectedBlock("polished_deepslate_pressure_plate", Items.STONE_PRESSURE_PLATE, () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, Properties.POLISHED_DEEPSLATE_PRESSURE_PLATE), CreativeModeTab.TAB_REDSTONE);
     public static final RegistryObject<Block> POLISHED_DEEPSLATE_BUTTON = HELPER.createInjectedBlock("polished_deepslate_button", Items.STONE_BUTTON, () -> new StoneButtonBlock(Properties.POLISHED_DEEPSLATE_BUTTON), CreativeModeTab.TAB_REDSTONE);
