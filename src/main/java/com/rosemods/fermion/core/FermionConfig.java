@@ -1,10 +1,17 @@
 package com.rosemods.fermion.core;
 
 import com.teamabnormals.blueprint.core.annotations.ConfigKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @EventBusSubscriber(modid = Fermion.MODID)
 public class FermionConfig {
@@ -45,8 +52,31 @@ public class FermionConfig {
     }
 
     public static class Client {
-        public Client(ForgeConfigSpec.Builder builder) {
+        private static final Map<CreativeModeTab, ConfigValue<String>> TAB_OVERRIDES = new HashMap<>();
 
+        public Client(ForgeConfigSpec.Builder builder) {
+            builder.push("Creative Mode Tab Tweaks");
+            builder.comment("Customise the Icon for each Creative Mode Tab.").push("Creative Mode Tab Icons");
+
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_BUILDING_BLOCKS, builder.define("Building Blocks Tab Icon", "minecraft:bricks"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_DECORATIONS, builder.define("Decorations Tab Icon", "minecraft:peony"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_REDSTONE, builder.define("Redstone Tab Icon", "minecraft:redstone"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_TRANSPORTATION, builder.define("Transportation Tab Icon", "minecraft:powered_rail"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_MISC, builder.define("Misc Tab Icon", "minecraft:lava_bucket"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_FOOD, builder.define("Foodstuffs Tab Icon", "minecraft:apple"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_TOOLS, builder.define("Tools Tab Icon", "minecraft:iron_axe"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_COMBAT, builder.define("Combat Tab Icon", "minecraft:golden_sword"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_BREWING, builder.define("Brewing Tab Icon", "minecraft:potion"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_INVENTORY, builder.define("Inventory Tab Icon", "minecraft:chest"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_SEARCH, builder.define("Search Tab Icon", "minecraft:compass"));
+            TAB_OVERRIDES.put(CreativeModeTab.TAB_HOTBAR, builder.define("Saved Hotbar Tab Icon", "minecraft:bookshelf"));
+
+            builder.pop();
+            builder.pop();
+        }
+
+        public ItemStack getTabIcon(CreativeModeTab tab) {
+            return ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(TAB_OVERRIDES.get(tab).get())).getDefaultInstance();
         }
 
     }

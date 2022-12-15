@@ -15,7 +15,6 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class FermionRecipeProvider extends RecipeProvider {
