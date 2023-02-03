@@ -32,6 +32,7 @@ public class FermionConfig {
         private final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
 
         public final ConfigValue<Boolean> dyeableTooltip;
+        public final ConfigValue<Boolean> horseArmourTooltip;
 
         public Client(ForgeConfigSpec.Builder builder) {
             builder.comment("Customise the Icon for each Creative Mode Tab").push("Creative Mode Tab Tweaks");
@@ -51,9 +52,11 @@ public class FermionConfig {
 
             builder.pop();
 
-            builder.comment("Extra tooltips for items that diplay extra helpful information").push("Item Tooltips");
+            builder.comment("Extra tooltips for items that display extra helpful information").push("Item Tooltips");
 
-            this.dyeableTooltip = builder.define("Dyable Tooltip", true);
+            this.dyeableTooltip = builder.define("Dyeable Tooltip", true);
+            this.horseArmourTooltip = builder.define("Horse Armour Tooltip", true);
+
             builder.pop();
 
         }

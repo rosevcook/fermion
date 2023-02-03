@@ -30,31 +30,19 @@ import java.util.TreeMap;
 import java.util.function.Supplier;
 
 public class FermionLanguageProvider implements DataProvider {
-    private static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().setLenient().create();
     private final Map<String, String> data = new TreeMap<>();
     private final DataGenerator gen;
-    private final String modid;
     private final String locale;
 
 
     public FermionLanguageProvider(GatherDataEvent event) {
         this.gen = event.getGenerator();
-        this.modid = Fermion.MODID;
         this.locale = "en_us";
     }
 
     protected void addTranslations() {
         Fermion.REGISTRY_HELPER.getItemSubHelper().getDeferredRegister().getEntries().forEach(this::tryItem);
         Fermion.REGISTRY_HELPER.getBlockSubHelper().getDeferredRegister().getEntries().forEach(this::tryBlock);
-
-        /*for (RegistryObject<SoundEvent> sound : Fermion.REGISTRY_HELPER.getSoundSubHelper().getDeferredRegister().getEntries())
-            trySound(sound);
-        for (RegistryObject<BlockEntityType<?>> blockEntity : Fermion.REGISTRY_HELPER.getBlockEntitySubHelper().getDeferredRegister().getEntries())
-            tryBlockEntity(blockEntity);
-        for (RegistryObject<EntityType<?>> entity : Fermion.REGISTRY_HELPER.getEntitySubHelper().getDeferredRegister().getEntries())
-            tryEntity(entity);
-        for (RegistryObject<Biome> biome : Fermion.REGISTRY_HELPER.getBiomeSubHelper().getDeferredRegister().getEntries())
-            tryBiome(biome);*/
 
         this.add("tooltip.fermion.dyeable", "Dyeable");
     }
@@ -63,7 +51,7 @@ public class FermionLanguageProvider implements DataProvider {
     public void run(CachedOutput cache) throws IOException {
         addTranslations();
         if (!data.isEmpty())
-            save(cache, data, this.gen.getOutputFolder().resolve("assets/" + modid + "/lang/" + locale + ".json"));
+            save(cache, data, this.gen.getOutputFolder().resolve("assets/" + Fermion.MODID + "/lang/" + locale + ".json"));
     }
 
     @Override

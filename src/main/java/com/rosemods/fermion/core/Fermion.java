@@ -3,6 +3,7 @@ package com.rosemods.fermion.core;
 import com.rosemods.fermion.core.data.client.FermionLanguageProvider;
 import com.rosemods.fermion.core.data.client.FermionModelProvider;
 import com.rosemods.fermion.core.data.server.FermionRecipeProvider;
+import com.rosemods.fermion.core.registry.util.FermionBlockSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.data.DataGenerator;
@@ -15,11 +16,13 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(Fermion.MODID)
 public class Fermion {
     public static final String MODID = "fermion";
-    public static final RegistryHelper REGISTRY_HELPER = new RegistryHelper(MODID);
+    public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MODID,
+            h -> h.putSubHelper(ForgeRegistries.BLOCKS, new FermionBlockSubRegistryHelper(h)));
 
     public Fermion() {
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -39,7 +42,7 @@ public class Fermion {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-
+        
     }
 
     private void clientSetup(FMLClientSetupEvent event) {

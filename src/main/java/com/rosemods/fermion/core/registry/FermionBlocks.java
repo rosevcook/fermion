@@ -3,20 +3,19 @@ package com.rosemods.fermion.core.registry;
 import com.rosemods.fermion.common.block.WaxedConcretePowderBlock;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.other.FermionConstants;
+import com.rosemods.fermion.core.registry.util.FermionBlockSubRegistryHelper;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
-import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = Fermion.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class FermionBlocks {
-    public static final BlockSubRegistryHelper HELPER = Fermion.REGISTRY_HELPER.getBlockSubHelper();
+    public static final FermionBlockSubRegistryHelper HELPER = Fermion.REGISTRY_HELPER.getBlockSubHelper();
 
     // Block Set Extensions //
 
@@ -38,21 +37,21 @@ public class FermionBlocks {
 
     // Waxed Concrete Powder //
 
-    public static final RegistryObject<Block> WAXED_WHITE_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_white_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.WHITE_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.WHITE_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_ORANGE_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_orange_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.ORANGE_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.ORANGE_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_MAGENTA_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_magenta_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.MAGENTA_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.MAGENTA_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_LIGHT_BLUE_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_light_blue_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.LIGHT_BLUE_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.LIGHT_BLUE_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_YELLOW_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_yellow_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.YELLOW_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.YELLOW_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_LIME_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_lime_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.LIME_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.LIME_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_PINK_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_pink_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.PINK_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.PINK_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_GRAY_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_gray_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.GRAY_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.GRAY_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_LIGHT_GRAY_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_light_gray_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.LIGHT_GRAY_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.LIGHT_GRAY_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_CYAN_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_cyan_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.CYAN_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.CYAN_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_PURPLE_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_purple_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.PURPLE_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.PURPLE_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_BLUE_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_blue_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.BLUE_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.BLUE_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_BROWN_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_brown_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.BROWN_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.BROWN_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_GREEN_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_green_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.GREEN_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.GREEN_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_RED_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_red_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.RED_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.RED_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final RegistryObject<Block> WAXED_BLACK_CONCRETE_POWDER = HELPER.createInjectedBlock("waxed_black_concrete_powder", Items.BLACK_CONCRETE_POWDER, () -> new WaxedConcretePowderBlock(Blocks.BLACK_CONCRETE_POWDER, BlockBehaviour.Properties.copy(Blocks.BLACK_CONCRETE_POWDER)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> WAXED_WHITE_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.WHITE_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_ORANGE_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.ORANGE_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_MAGENTA_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.MAGENTA_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_LIGHT_BLUE_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.LIGHT_BLUE_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_YELLOW_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.YELLOW_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_LIME_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.LIME_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_PINK_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.PINK_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_GRAY_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.GRAY_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_LIGHT_GRAY_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.LIGHT_GRAY_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_CYAN_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.CYAN_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_PURPLE_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.PURPLE_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_BLUE_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.BLUE_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_BROWN_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.BROWN_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_GREEN_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.GREEN_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_RED_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.RED_CONCRETE_POWDER);
+    public static final RegistryObject<Block> WAXED_BLACK_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.BLACK_CONCRETE_POWDER);
 
 }
