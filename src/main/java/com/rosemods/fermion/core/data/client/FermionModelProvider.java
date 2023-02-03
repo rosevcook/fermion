@@ -35,9 +35,6 @@ public class FermionModelProvider extends BlockStateProvider {
         this.stairs(FermionBlocks.SMOOTH_BASALT_STAIRS, () -> Blocks.SMOOTH_BASALT);
         this.verticalSlab(FermionBlocks.SMOOTH_BASALT_VERTICAL_SLAB, () -> Blocks.SMOOTH_BASALT);
 
-        this.pressurePlate(FermionBlocks.POLISHED_DEEPSLATE_PRESSURE_PLATE, () -> Blocks.POLISHED_DEEPSLATE);
-        this.button(FermionBlocks.POLISHED_DEEPSLATE_BUTTON, () -> Blocks.POLISHED_DEEPSLATE);
-
         this.stairs(FermionBlocks.SMOOTH_STONE_STAIRS, () -> Blocks.SMOOTH_STONE);
 
         this.wall(FermionBlocks.QUARTZ_BRICK_WALL, () -> Blocks.QUARTZ_BRICKS);
@@ -90,19 +87,6 @@ public class FermionModelProvider extends BlockStateProvider {
         ResourceLocation texture = this.blockTexture(textureBlock.get());
         this.wallBlock((WallBlock) wall.get(), texture);
         this.itemModels().wallInventory(this.getName(wall), texture);
-    }
-
-    //button gen and item model
-    private void button(RegistryObject<? extends Block> button, Supplier<? extends Block> textureBlock) {
-        ResourceLocation texture = this.blockTexture(textureBlock.get());
-        this.buttonBlock((ButtonBlock) button.get(), texture);
-        this.itemModels().buttonInventory(this.getName(button), texture);
-    }
-
-    //pressure plate gen and item model
-    private void pressurePlate(RegistryObject<? extends Block> pressurePlate, Supplier<? extends Block> textureBlock) {
-        this.pressurePlateBlock((PressurePlateBlock) pressurePlate.get(), this.blockTexture(textureBlock.get()));
-        this.itemModel(pressurePlate);
     }
 
     //vertical slab gen from block texture and item model

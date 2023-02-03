@@ -44,17 +44,9 @@ public class FermionLanguageProvider implements DataProvider {
     }
 
     protected void addTranslations() {
+        Fermion.REGISTRY_HELPER.getItemSubHelper().getDeferredRegister().getEntries().forEach(this::tryItem);
+        Fermion.REGISTRY_HELPER.getBlockSubHelper().getDeferredRegister().getEntries().forEach(this::tryBlock);
 
-
-        /*
-            Automatically create translations for blocks and items based on their registry name.
-            This must be at the very bottom to avoid overwriting errors. These functions ignore objects
-            that have already been translated above.
-         */
-        for (RegistryObject<Item> item : Fermion.REGISTRY_HELPER.getItemSubHelper().getDeferredRegister().getEntries())
-            tryItem(item);
-        for (RegistryObject<Block> block : Fermion.REGISTRY_HELPER.getBlockSubHelper().getDeferredRegister().getEntries())
-            tryBlock(block);
         /*for (RegistryObject<SoundEvent> sound : Fermion.REGISTRY_HELPER.getSoundSubHelper().getDeferredRegister().getEntries())
             trySound(sound);
         for (RegistryObject<BlockEntityType<?>> blockEntity : Fermion.REGISTRY_HELPER.getBlockEntitySubHelper().getDeferredRegister().getEntries())
@@ -63,6 +55,8 @@ public class FermionLanguageProvider implements DataProvider {
             tryEntity(entity);
         for (RegistryObject<Biome> biome : Fermion.REGISTRY_HELPER.getBiomeSubHelper().getDeferredRegister().getEntries())
             tryBiome(biome);*/
+
+        this.add("tooltip.fermion.dyeable", "Dyeable");
     }
 
     @Override

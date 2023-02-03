@@ -1,10 +1,12 @@
 package com.rosemods.fermion.core.data.server;
 
+import com.rosemods.fermion.common.block.WaxedConcretePowderBlock;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.registry.FermionBlocks;
 import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -33,9 +35,6 @@ public class FermionRecipeProvider extends RecipeProvider {
         blockSet(Blocks.END_STONE, FermionBlocks.END_STONE_SLAB.get(), FermionBlocks.END_STONE_STAIRS.get(), FermionBlocks.END_STONE_WALL.get(), FermionBlocks.END_STONE_VERTICAL_SLAB.get(), true);
         blockSet(Blocks.SMOOTH_BASALT, FermionBlocks.SMOOTH_BASALT_SLAB.get(), FermionBlocks.SMOOTH_BASALT_STAIRS.get(), null, FermionBlocks.SMOOTH_BASALT_VERTICAL_SLAB.get(), true);
 
-        pressurePlate(Blocks.POLISHED_DEEPSLATE, FermionBlocks.POLISHED_DEEPSLATE_PRESSURE_PLATE.get());
-        button(Blocks.POLISHED_DEEPSLATE, FermionBlocks.POLISHED_DEEPSLATE_BUTTON.get());
-
         stairs(Blocks.SMOOTH_STONE, FermionBlocks.SMOOTH_STONE_STAIRS.get());
         stoneCutting(Blocks.SMOOTH_STONE, FermionBlocks.SMOOTH_STONE_STAIRS.get(), 1);
 
@@ -46,6 +45,11 @@ public class FermionRecipeProvider extends RecipeProvider {
         stoneCutting(Blocks.QUARTZ_BRICKS, FermionBlocks.QUARTZ_BRICK_WALL.get(), 1);
         stoneCutting(Blocks.PRISMARINE_BRICKS, FermionBlocks.PRISMARINE_BRICK_WALL.get(), 1);
         stoneCutting(Blocks.DARK_PRISMARINE, FermionBlocks.DARK_PRISMARINE_WALL.get(), 1);
+
+        // Waxed Concrete Powder //
+
+        for(Block block : WaxedConcretePowderBlock.WAXED.keySet())
+            waxedConcretePowder(block, WaxedConcretePowderBlock.WAXED.get(block));
     }
 
     // Sets //
@@ -84,6 +88,14 @@ public class FermionRecipeProvider extends RecipeProvider {
                 .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(slab)));
     }
 
+    private static void waxedConcretePowder(Block block, Block powderBlock) {
+
+        ShapelessRecipeBuilder.shapeless(block)
+                .requires(powderBlock).requires(Items.HONEYCOMB)
+                .unlockedBy("has_concrete_powder", has(powderBlock))
+                .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(block)));
+    }
+
     private static void verticalSlab(ItemLike verticalSlab, ItemLike slab) {
         conditionalRecipe(ShapedRecipeBuilder.shaped(verticalSlab, 3)
                 .define('#', slab)
@@ -116,21 +128,6 @@ public class FermionRecipeProvider extends RecipeProvider {
                 .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(wall)));
     }
 
-    private static void pressurePlate(ItemLike ingredient, ItemLike pressurePlate) {
-        ShapedRecipeBuilder.shaped(pressurePlate)
-                .define('#', ingredient)
-                .pattern("##")
-                .unlockedBy("has_" + getName(ingredient), has(ingredient))
-                .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(pressurePlate)));
-    }
-
-    private static void button(ItemLike ingredient, ItemLike button) {
-        ShapelessRecipeBuilder.shapeless(button)
-                .requires(ingredient)
-                .unlockedBy("has_" + getName(ingredient), has(ingredient))
-                .save(recipes, Fermion.REGISTRY_HELPER.prefix("polished_arkose_button"));
-    }
-
     // Conditions //
 
     private static void conditionalRecipe(RecipeBuilder recipe, ICondition condition, ResourceLocation id) {
@@ -140,12 +137,6 @@ public class FermionRecipeProvider extends RecipeProvider {
     private static ICondition getQuarkCondition(String flag) {
         return new QuarkFlagRecipeCondition(new ResourceLocation("blueprint", "quark_flag"), flag);
     }
-
-    /*
-    private static ICondition configCondition(String config) {
-        return new ConfigValueCondition();
-    }
-     */
 
     // Util //
 
