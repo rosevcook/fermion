@@ -1,5 +1,6 @@
 package com.rosemods.fermion.core.registry;
 
+import com.rosemods.fermion.common.block.CandleBlockBlock;
 import com.rosemods.fermion.common.block.WaxedConcretePowderBlock;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.other.FermionConstants;
@@ -9,6 +10,8 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -53,5 +56,14 @@ public class FermionBlocks {
     public static final RegistryObject<Block> WAXED_GREEN_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.GREEN_CONCRETE_POWDER);
     public static final RegistryObject<Block> WAXED_RED_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.RED_CONCRETE_POWDER);
     public static final RegistryObject<Block> WAXED_BLACK_CONCRETE_POWDER = HELPER.createWaxedConcretePowder(Blocks.BLACK_CONCRETE_POWDER);
+
+
+    // Candle Blocks //
+
+    public static final RegistryObject<Block> CANDLE_BLOCK = HELPER.createBlock("candle_block", () -> new CandleBlockBlock(Properties.CANDLE_BLOCK), CreativeModeTab.TAB_DECORATIONS);
+
+    private static class Properties {
+        public static final BlockBehaviour.Properties CANDLE_BLOCK = BlockBehaviour.Properties.of(Material.DECORATION).noOcclusion().strength(.7f).sound(SoundType.CANDLE);//.lightLevel(CandleBlock.LIGHT_EMISSION);
+    }
 
 }

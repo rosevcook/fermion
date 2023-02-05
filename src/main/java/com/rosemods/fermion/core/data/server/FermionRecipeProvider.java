@@ -6,6 +6,7 @@ import com.rosemods.fermion.core.registry.FermionBlocks;
 import com.teamabnormals.blueprint.core.api.conditions.QuarkFlagRecipeCondition;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -50,6 +51,10 @@ public class FermionRecipeProvider extends RecipeProvider {
 
         for(Block block : WaxedConcretePowderBlock.WAXED.keySet())
             waxedConcretePowder(block, WaxedConcretePowderBlock.WAXED.get(block));
+
+        // Candle Blocks //
+
+        candleBlock(FermionBlocks.CANDLE_BLOCK, Blocks.CANDLE, null);
     }
 
     // Sets //
@@ -89,11 +94,26 @@ public class FermionRecipeProvider extends RecipeProvider {
     }
 
     private static void waxedConcretePowder(Block block, Block powderBlock) {
-
         ShapelessRecipeBuilder.shapeless(block)
                 .requires(powderBlock).requires(Items.HONEYCOMB)
                 .unlockedBy("has_concrete_powder", has(powderBlock))
                 .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(block)));
+    }
+
+    private static void candleBlock(RegistryObject<Block> block, Block candle, Item dye) {
+        ShapedRecipeBuilder.shaped(block.get())
+                .define('#', candle)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_candle", has(candle))
+                .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(block.get())));
+
+        if (dye != null)
+            ShapelessRecipeBuilder.shapeless(block.get())
+                    .requires(FermionBlocks.CANDLE_BLOCK.get())
+                    .requires(dye)
+                    .unlockedBy("has_candle_block", has(FermionBlocks.CANDLE_BLOCK.get()))
+                    .save(recipes, Fermion.REGISTRY_HELPER.prefix(getName(block.get()) + "_from_dye"));
     }
 
     private static void verticalSlab(ItemLike verticalSlab, ItemLike slab) {

@@ -59,6 +59,10 @@ public class FermionModelProvider extends BlockStateProvider {
         this.withExistingParent(FermionBlocks.WAXED_GREEN_CONCRETE_POWDER, this.mcLoc("block/green_concrete_powder"));
         this.withExistingParent(FermionBlocks.WAXED_RED_CONCRETE_POWDER, this.mcLoc("block/red_concrete_powder"));
         this.withExistingParent(FermionBlocks.WAXED_BLACK_CONCRETE_POWDER, this.mcLoc("block/black_concrete_powder"));
+
+        // Candle Blocks //
+
+        this.candleBlock(FermionBlocks.CANDLE_BLOCK);
     }
 
     // Generators //
@@ -101,6 +105,14 @@ public class FermionModelProvider extends BlockStateProvider {
                 .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.EAST).addModels(new ConfiguredModel(model, 0, 90, true))
                 .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.WEST).addModels(new ConfiguredModel(model, 0, 270, true))
                 .partialState().with(VerticalSlabBlock.TYPE, VerticalSlabBlock.VerticalSlabType.DOUBLE).addModels(new ConfiguredModel(this.models().getExistingFile(texture)));
+    }
+
+    //candle block
+    private void candleBlock(RegistryObject<Block> candleBlock) {
+        ResourceLocation texture = this.blockTexture(candleBlock.get());
+
+        this.simpleBlock(candleBlock.get(), this.models().withExistingParent(this.getName(candleBlock), this.modLoc("short_candle")).renderType("cutout").texture("texture", texture));
+        this.itemModel(candleBlock);
     }
 
     // Item Models //
