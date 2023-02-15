@@ -21,12 +21,14 @@ public class FermionEvents {
     public static void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
 
+        //horse armour tooltip
         if (stack.getItem() instanceof HorseArmorItem item && FermionConfig.CLIENT.horseArmourTooltip.get()) {
             event.getToolTip().add(Component.literal(""));
-            event.getToolTip().add(Component.translatable("tooltip.fermion.modifiers.horse", item.getProtection(), 1, 2).withStyle(ChatFormatting.GRAY));
+            event.getToolTip().add(Component.translatable("tooltip.fermion.modifiers.horse", item.getProtection()).withStyle(ChatFormatting.GRAY));
             event.getToolTip().add(Component.translatable("tooltip.fermion.horse_armour").withStyle(ChatFormatting.BLUE));
         }
 
+        //dyeable tooltip
         if (stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack) && FermionConfig.CLIENT.dyeableTooltip.get()) {
             Deque<Component> tooltip = new LinkedList<>(event.getToolTip());
             Component first = tooltip.peekFirst();

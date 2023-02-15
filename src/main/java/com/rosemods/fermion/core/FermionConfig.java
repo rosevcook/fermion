@@ -1,6 +1,5 @@
 package com.rosemods.fermion.core;
 
-import com.teamabnormals.blueprint.core.annotations.ConfigKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -11,6 +10,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @EventBusSubscriber(modid = Fermion.MODID)
@@ -20,12 +20,11 @@ public class FermionConfig {
 
     public static class Client {
         private final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
-
         public final ConfigValue<Boolean> dyeableTooltip;
         public final ConfigValue<Boolean> horseArmourTooltip;
 
         public Client(ForgeConfigSpec.Builder builder) {
-            builder.comment("Customise the Icon for each Creative Mode Tab").push("Creative Mode Tab Tweaks");
+            builder.comment("Creative Mode Tab Tweaks").push("tabtweaks");
 
             this.tabOverrides.put(CreativeModeTab.TAB_BUILDING_BLOCKS, builder.define("Building Blocks Tab Icon", "minecraft:bricks"));
             this.tabOverrides.put(CreativeModeTab.TAB_DECORATIONS, builder.define("Decorations Tab Icon", "minecraft:peony"));
@@ -41,11 +40,10 @@ public class FermionConfig {
             this.tabOverrides.put(CreativeModeTab.TAB_HOTBAR, builder.define("Saved Hotbar Tab Icon", "minecraft:bookshelf"));
 
             builder.pop();
+            builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
 
-            builder.comment("Extra tooltips for items that display extra helpful information").push("Item Tooltips");
-
-            this.dyeableTooltip = builder.define("Dyeable Tooltip", true);
-            this.horseArmourTooltip = builder.define("Horse Armour Tooltip", true);
+            this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("Dyeable Tooltip", true);
+            this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("Horse Armour Tooltip", true);
 
             builder.pop();
 

@@ -25,7 +25,6 @@ public class Fermion {
         bus.addListener(this::dataSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
-
         context.registerConfig(ModConfig.Type.CLIENT, FermionConfig.CLIENT_SPEC);
     }
 
