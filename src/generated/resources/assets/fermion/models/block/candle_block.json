@@ -1,7 +1,0 @@
-{
-  "parent": "fermion:block/short_candle",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "texture": "fermion:block/candle_block"
-  }
-}
