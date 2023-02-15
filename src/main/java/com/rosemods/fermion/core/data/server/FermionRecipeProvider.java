@@ -63,13 +63,13 @@ public class FermionRecipeProvider extends RecipeProvider {
         if (slab != null) slab(ingredient, slab);
         if (stairs != null) stairs(ingredient, stairs);
         if (wall != null) wall(ingredient, wall);
-        if (verticalSlab != null) verticalSlab(ingredient, verticalSlab);
+        if (verticalSlab != null) verticalSlab(verticalSlab, slab);
 
         if (stoneCutter) {
             if (slab != null) stoneCutting(ingredient, slab, 2);
             if (stairs != null) stoneCutting(ingredient, stairs, 1);
             if (wall != null) stoneCutting(ingredient, wall, 1);
-            if (verticalSlab != null) stoneCutting(ingredient, verticalSlab, 2);
+            if (verticalSlab != null) conditionalRecipe(SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), verticalSlab, 2).unlockedBy("has_" + getName(ingredient), has(ingredient)), getQuarkCondition("vertical_slabs"), Fermion.REGISTRY_HELPER.prefix(getName(verticalSlab) + "_from_" + getName(ingredient) + "_stonecutting"));
         }
 
     }

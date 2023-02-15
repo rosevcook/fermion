@@ -9,7 +9,7 @@
               "items": [
                 {
                   "items": [
-                    "fermion:end_stone_vertical_slab"
+                    "fermion:smooth_basalt_slab"
                   ]
                 }
               ]
@@ -18,7 +18,7 @@
           },
           "has_the_recipe": {
             "conditions": {
-              "recipe": "fermion:end_stone"
+              "recipe": "fermion:smooth_basalt_vertical_slab"
             },
             "trigger": "minecraft:recipe_unlocked"
           }
@@ -31,7 +31,7 @@
         ],
         "rewards": {
           "recipes": [
-            "fermion:end_stone"
+            "fermion:smooth_basalt_vertical_slab"
           ]
         }
       },

@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -23,6 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Fermion.MODID)
 public class FermionEntityEvents {
@@ -59,16 +61,25 @@ public class FermionEntityEvents {
     public static void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
 
+        if (stack.getItem() instanceof HorseArmorItem item && FermionConfig.CLIENT.horseArmourTooltip.get()) {
+            event.getToolTip().add(Component.literal(""));
+            event.getToolTip().add(Component.translatable("tooltip.fermion.modifiers.horse").withStyle(ChatFormatting.GRAY));
+            event.getToolTip().add(Component.literal("+" + item.getProtection()).withStyle(ChatFormatting.BLUE));
+            event.getToolTip().add(Component.translatable("tooltip.fermion.horse_armour").withStyle(ChatFormatting.BLUE));
+        }
+
         if (stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack) && FermionConfig.CLIENT.dyeableTooltip.get()) {
             Deque<Component> tooltip = new LinkedList<>(event.getToolTip());
             Component first = tooltip.peekFirst();
 
             tooltip.removeFirst();
-            tooltip.addFirst(Component.translatable( "tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY));
+            tooltip.addFirst(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY));
             tooltip.addFirst(first);
 
             event.getToolTip().removeAll(event.getToolTip());
             event.getToolTip().addAll(tooltip);
         }
+
     }
+
 }

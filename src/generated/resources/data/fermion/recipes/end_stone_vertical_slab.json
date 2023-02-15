@@ -9,13 +9,19 @@
         }
       ],
       "recipe": {
-        "type": "minecraft:crafting_shapeless",
-        "ingredients": [
-          {
-            "item": "minecraft:end_stone"
+        "type": "minecraft:crafting_shaped",
+        "key": {
+          "#": {
+            "item": "fermion:end_stone_slab"
           }
+        },
+        "pattern": [
+          "#",
+          "#",
+          "#"
         ],
         "result": {
+          "count": 3,
           "item": "fermion:end_stone_vertical_slab"
         }
       }

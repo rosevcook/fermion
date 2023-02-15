@@ -27,5 +27,7 @@
   "block.fermion.waxed_red_concrete_powder": "Waxed Red Concrete Powder",
   "block.fermion.waxed_white_concrete_powder": "Waxed White Concrete Powder",
   "block.fermion.waxed_yellow_concrete_powder": "Waxed Yellow Concrete Powder",
-  "tooltip.fermion.dyeable": "Dyeable"
+  "tooltip.fermion.dyeable": "Dyeable",
+  "tooltip.fermion.horse_armour": "Horse Armor",
+  "tooltip.fermion.modifiers.horse": "When on Horse:"
 }

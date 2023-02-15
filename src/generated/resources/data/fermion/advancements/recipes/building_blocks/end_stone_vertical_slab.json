@@ -4,34 +4,34 @@
       "advancement": {
         "parent": "minecraft:recipes/root",
         "criteria": {
-          "has_the_recipe": {
-            "conditions": {
-              "recipe": "fermion:end_stone_revert"
-            },
-            "trigger": "minecraft:recipe_unlocked"
-          },
-          "has_vertical_slab": {
+          "has_slab": {
             "conditions": {
               "items": [
                 {
                   "items": [
-                    "minecraft:end_stone"
+                    "fermion:end_stone_slab"
                   ]
                 }
               ]
             },
             "trigger": "minecraft:inventory_changed"
+          },
+          "has_the_recipe": {
+            "conditions": {
+              "recipe": "fermion:end_stone_vertical_slab"
+            },
+            "trigger": "minecraft:recipe_unlocked"
           }
         },
         "requirements": [
           [
-            "has_vertical_slab",
+            "has_slab",
             "has_the_recipe"
           ]
         ],
         "rewards": {
           "recipes": [
-            "fermion:end_stone_revert"
+            "fermion:end_stone_vertical_slab"
           ]
         }
       },

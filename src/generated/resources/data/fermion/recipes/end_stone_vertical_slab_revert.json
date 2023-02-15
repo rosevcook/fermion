@@ -12,11 +12,11 @@
         "type": "minecraft:crafting_shapeless",
         "ingredients": [
           {
-            "item": "minecraft:smooth_basalt"
+            "item": "fermion:end_stone_vertical_slab"
           }
         ],
         "result": {
-          "item": "fermion:smooth_basalt_vertical_slab"
+          "item": "fermion:end_stone_slab"
         }
       }
     }

@@ -45,6 +45,8 @@ public class FermionLanguageProvider implements DataProvider {
         Fermion.REGISTRY_HELPER.getBlockSubHelper().getDeferredRegister().getEntries().forEach(this::tryBlock);
 
         this.add("tooltip.fermion.dyeable", "Dyeable");
+        this.add("tooltip.fermion.horse_armour", "Horse Armor"); // $a$ replaces with the armour value
+        this.add("tooltip.fermion.modifiers.horse", "When on Horse:");
     }
 
     @Override
