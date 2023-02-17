@@ -10,9 +10,7 @@ license = "https://github.com/rosevcook/fermion/blob/main/LICENSE.txt"
     logoFile = "logo.png"
     displayURL = "https://www.curseforge.com/minecraft/mc-mods/fermion"
     authors = "Rose"
-    description = '''
-    
-    '''
+    description = '''gaga'''
 
 [[dependencies.fermion]]
     modId = "forge"
@@ -26,11 +24,4 @@ license = "https://github.com/rosevcook/fermion/blob/main/LICENSE.txt"
     mandatory = true
     versionRange = "[1.19.2,)"
     ordering = "NONE"
-    side = "BOTH"
-
-[[dependencies.fermion]]
-    modId = "blueprint"
-    mandatory = true
-    versionRange = "[6.1.0,)"
-    ordering = "BEFORE"
     side = "BOTH"

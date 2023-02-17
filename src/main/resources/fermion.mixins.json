@@ -3,7 +3,7 @@
   "package": "com.rosemods.fermion.core.mixin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
-  "refmap": "flourishing.refmap.json",
+  "refmap": "fermion.refmap.json",
   "mixins": [
     "CreativeModeTabMixin"
   ],

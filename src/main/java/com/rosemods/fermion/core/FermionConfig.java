@@ -1,16 +1,12 @@
 package com.rosemods.fermion.core;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @EventBusSubscriber(modid = Fermion.MODID)
@@ -19,7 +15,7 @@ public class FermionConfig {
     public static final ForgeConfigSpec CLIENT_SPEC;
 
     public static class Client {
-        private final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
+        public final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
         public final ConfigValue<Boolean> dyeableTooltip;
         public final ConfigValue<Boolean> horseArmourTooltip;
 
@@ -47,10 +43,6 @@ public class FermionConfig {
 
             builder.pop();
 
-        }
-
-        public ItemStack getTabIcon(CreativeModeTab tab) {
-            return ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(this.tabOverrides.get(tab).get())).getDefaultInstance();
         }
 
     }
