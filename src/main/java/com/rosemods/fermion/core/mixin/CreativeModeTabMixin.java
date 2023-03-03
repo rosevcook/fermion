@@ -17,8 +17,8 @@ public class CreativeModeTabMixin {
     private void getIconItem(CallbackInfoReturnable<ItemStack> info) {
         CreativeModeTab tab = (CreativeModeTab) (Object) this;
 
-        if (FermionConfig.CLIENT.tabOverrides.containsKey(tab)) {
-            ForgeConfigSpec.ConfigValue<String> config = FermionConfig.CLIENT.tabOverrides.get(tab);
+        if (FermionConfig.COMMON.tabOverrides.containsKey(tab)) {
+            ForgeConfigSpec.ConfigValue<String> config = FermionConfig.COMMON.tabOverrides.get(tab);
 
             if (config != null)
                 info.setReturnValue(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(config.get())).getDefaultInstance());
