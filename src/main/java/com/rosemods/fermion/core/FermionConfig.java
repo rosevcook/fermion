@@ -52,8 +52,8 @@ public class FermionConfig {
             builder.pop();
 
             builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
-            this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("Dyeable Tooltip", true);
-            this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("Horse Armour Tooltip", true);
+            this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("dyeable", true);
+            this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("horse-armour", true);
             builder.pop();
         }
 

@@ -32,7 +32,7 @@ public class FermionEvents {
         }
 
         //dyeable tooltip
-        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || (stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME) && ModList.get().isLoaded("quark"))) && FermionConfig.CLIENT.dyeableTooltip.get()) {
+        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || ((stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark"))) && FermionConfig.CLIENT.dyeableTooltip.get()) {
             Deque<Component> tooltip = new LinkedList<>(event.getToolTip());
             Component first = tooltip.peekFirst();
 
