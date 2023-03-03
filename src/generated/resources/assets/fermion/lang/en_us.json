@@ -1,5 +1,5 @@
 {
   "tooltip.fermion.dyeable": "Dyeable",
-  "tooltip.fermion.horse_armour": "+%d Horse Armor",
+  "tooltip.fermion.horse_armour": "%s Horse Armor",
   "tooltip.fermion.modifiers.horse": "When on Horse:"
 }

@@ -4,6 +4,7 @@ import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,9 +17,12 @@ public class CreativeModeTabMixin {
     private void getIconItem(CallbackInfoReturnable<ItemStack> info) {
         CreativeModeTab tab = (CreativeModeTab) (Object) this;
 
-        if (FermionConfig.CLIENT.tabOverrides.containsKey(tab))
-            info.setReturnValue(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(
-                    FermionConfig.CLIENT.tabOverrides.get(tab).get())).getDefaultInstance());
+        if (FermionConfig.CLIENT.tabOverrides.containsKey(tab)) {
+            ForgeConfigSpec.ConfigValue<String> config = FermionConfig.CLIENT.tabOverrides.get(tab);
+
+            if (config != null)
+                info.setReturnValue(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(config.get())).getDefaultInstance());
+        }
     }
 
 }

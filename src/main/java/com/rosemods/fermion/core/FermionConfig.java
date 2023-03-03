@@ -1,5 +1,6 @@
 package com.rosemods.fermion.core;
 
+import com.google.common.collect.Lists;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
@@ -7,12 +8,25 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @EventBusSubscriber(modid = Fermion.MODID)
 public class FermionConfig {
     public static final Client CLIENT;
+    public static final Common COMMON;
     public static final ForgeConfigSpec CLIENT_SPEC;
+    public static final ForgeConfigSpec COMMON_SPEC;
+
+    public static class Common {
+        public final ConfigValue<List<? extends String>> hiddenItems;
+
+        public Common(ForgeConfigSpec.Builder builder) {
+            this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("hidden-items", Lists.newArrayList("minecraft:petrified_oak_slab"));
+        }
+
+    }
+
 
     public static class Client {
         public final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
@@ -20,8 +34,8 @@ public class FermionConfig {
         public final ConfigValue<Boolean> horseArmourTooltip;
 
         public Client(ForgeConfigSpec.Builder builder) {
-            builder.comment("Creative Mode Tab Tweaks").push("tabtweaks");
-
+            builder.comment("Creative Mode Tab Tweaks").push("tab-tweaks");
+            builder.comment("Replace the Item Icon for the vanilla creative mode tabs").push("tab-icons");
             this.tabOverrides.put(CreativeModeTab.TAB_BUILDING_BLOCKS, builder.define("Building Blocks Tab Icon", "minecraft:bricks"));
             this.tabOverrides.put(CreativeModeTab.TAB_DECORATIONS, builder.define("Decorations Tab Icon", "minecraft:peony"));
             this.tabOverrides.put(CreativeModeTab.TAB_REDSTONE, builder.define("Redstone Tab Icon", "minecraft:redstone"));
@@ -34,22 +48,23 @@ public class FermionConfig {
             this.tabOverrides.put(CreativeModeTab.TAB_INVENTORY, builder.define("Inventory Tab Icon", "minecraft:chest"));
             this.tabOverrides.put(CreativeModeTab.TAB_SEARCH, builder.define("Search Tab Icon", "minecraft:compass"));
             this.tabOverrides.put(CreativeModeTab.TAB_HOTBAR, builder.define("Saved Hotbar Tab Icon", "minecraft:bookshelf"));
-
             builder.pop();
-            builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
+            builder.pop();
 
+            builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
             this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("Dyeable Tooltip", true);
             this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("Horse Armour Tooltip", true);
-
             builder.pop();
-
         }
 
     }
 
     static {
+        final Pair<Common, ForgeConfigSpec> commonSpecPair = new ForgeConfigSpec.Builder().configure(Common::new);
         final Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
 
+        COMMON = commonSpecPair.getLeft();
+        COMMON_SPEC = commonSpecPair.getRight();
         CLIENT = clientSpecPair.getLeft();
         CLIENT_SPEC = clientSpecPair.getRight();
     }
