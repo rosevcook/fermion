@@ -21,8 +21,13 @@ public class FermionConfig {
     public static class Common {
         public final ConfigValue<List<? extends String>> hiddenItems;
 
+        public final ConfigValue<Boolean> hideModdedItemTabs;
+
         public Common(ForgeConfigSpec.Builder builder) {
-            this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("hidden-items", Lists.newArrayList("minecraft:petrified_oak_slab"));
+            builder.comment("Creative Mode Tab Tweaks").push("tab-tweaks");
+            this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("Hidden Items", Lists.newArrayList("minecraft:petrified_oak_slab"));
+            this.hideModdedItemTabs = builder.comment("Hides all modded Creative Mode Tabs. (REQUIRES RESTART)").define("Hide Modded Tabs", false);
+            builder.pop();
         }
 
     }
@@ -52,8 +57,8 @@ public class FermionConfig {
             builder.pop();
 
             builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
-            this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("dyeable", true);
-            this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("horse-armour", true);
+            this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("Dyeable Tooltip", true);
+            this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("Horse Armour Tooltip", true);
             builder.pop();
         }
 

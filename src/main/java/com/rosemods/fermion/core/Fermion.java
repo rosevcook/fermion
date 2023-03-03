@@ -1,10 +1,8 @@
 package com.rosemods.fermion.core;
 
 import com.rosemods.fermion.core.data.client.FermionLanguageProvider;
+import com.rosemods.fermion.core.other.FermionModifiers;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,9 +12,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-
 @Mod(Fermion.MODID)
 public class Fermion {
     public static final String MODID = "fermion";
@@ -35,7 +30,10 @@ public class Fermion {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(Fermion::removeItems);
+        event.enqueueWork(() -> {
+            FermionModifiers.removeItems();
+            FermionModifiers.hideModdedTabs();
+        });
     }
 
     private void clientSetup(FMLClientSetupEvent event) {
@@ -49,12 +47,5 @@ public class Fermion {
         gen.addProvider(client, new FermionLanguageProvider(event));
     }
 
-    private static void removeItems() {
-        for(String s : FermionConfig.COMMON.hiddenItems.get()) {
-            Item i = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s));
 
-            if (i != null && i != Items.AIR)
-                ObfuscationReflectionHelper.setPrivateValue(Item.class, i, null, "f_41377_");
-        }
-    }
 }
