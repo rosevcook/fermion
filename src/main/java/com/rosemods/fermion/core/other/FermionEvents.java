@@ -4,6 +4,7 @@ import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.HorseArmorItem;
 import net.minecraft.world.item.ItemStack;
@@ -26,8 +27,8 @@ public class FermionEvents {
         //horse armour tooltip
         if (stack.getItem() instanceof HorseArmorItem item && FermionConfig.CLIENT.horseArmourTooltip.get()) {
             event.getToolTip().add(Component.literal(""));
-            event.getToolTip().add(Component.translatable("tooltip.fermion.modifiers.horse","+" + item.getProtection()).withStyle(ChatFormatting.GRAY));
-            event.getToolTip().add(Component.translatable("tooltip.fermion.horse_armour").withStyle(ChatFormatting.BLUE));
+            event.getToolTip().add(Component.translatable("tooltip.fermion.when_on_horse").withStyle(ChatFormatting.GRAY));
+            event.getToolTip().add((Component.translatable("attribute.modifier.plus." + AttributeModifier.Operation.ADDITION.toValue(), ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(item.getProtection()), Component.translatable("tooltip.fermion.horse_armour"))).withStyle(ChatFormatting.BLUE));
         }
 
         //dyeable tooltip

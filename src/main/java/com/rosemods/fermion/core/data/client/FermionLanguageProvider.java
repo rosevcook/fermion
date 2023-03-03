@@ -14,8 +14,8 @@ public class FermionLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         this.add("tooltip.fermion.dyeable", "Dyeable");
-        this.add("tooltip.fermion.horse_armour", "%s Horse Armor");
-        this.add("tooltip.fermion.modifiers.horse", "When on Horse:");
+        this.add("tooltip.fermion.horse_armour", "Horse Armor");
+        this.add("tooltip.fermion.when_on_horse", "When on Horse:");
     }
 
 }
