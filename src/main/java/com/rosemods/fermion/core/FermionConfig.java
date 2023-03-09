@@ -20,9 +20,9 @@ public class FermionConfig {
 
     public static class Common {
         public final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
-        public final ConfigValue<List<? extends String>> hiddenItems;
         public final ConfigValue<Boolean> hideModdedItemTabs;
-
+        public final ConfigValue<List<? extends String>> hiddenItems;
+        public final ConfigValue<List<? extends String>> tabModifiers;
 
         public Common(ForgeConfigSpec.Builder builder) {
             builder.comment("Creative Mode Tab Tweaks").push("tab-tweaks");
@@ -41,14 +41,14 @@ public class FermionConfig {
             this.tabOverrides.put(CreativeModeTab.TAB_HOTBAR, builder.define("Saved Hotbar Tab Icon", "minecraft:bookshelf"));
             builder.pop();
 
-            this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("Hidden Items", Lists.newArrayList("minecraft:petrified_oak_slab"));
             this.hideModdedItemTabs = builder.comment("Hides all modded Creative Mode Tabs. (REQUIRES RESTART)").define("Hide Modded Tabs", false);
+            this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("Hidden Items", Lists.newArrayList("minecraft:petrified_oak_slab"));
+            this.tabModifiers = builder.comment("Moves any item in this list to any specified item tab (REQUIRES RESTART). values: building_blocks, decorations, redstone, transport, misc, food, tools, combat, brewing").define("Item Tab Modifiers", Lists.newArrayList("minecraft:command_block=redstone", "minecraft:repeating_command_block=redstone", "minecraft:chain_command_block=redstone", "minecraft:command_block_minecart=transport"));
 
             builder.pop();
         }
 
     }
-
 
     public static class Client {
         public final ConfigValue<Boolean> dyeableTooltip;
