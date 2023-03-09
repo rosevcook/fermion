@@ -8,6 +8,7 @@
     "CreativeModeTabMixin"
   ],
   "client": [
+    "client.EffectRenderingInventoryScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

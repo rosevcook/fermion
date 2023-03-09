@@ -7,7 +7,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.DyeableLeatherItem;
@@ -47,7 +46,7 @@ public class FermionEvents {
             tooltip.addFirst(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY));
             tooltip.addFirst(first);
 
-            event.getToolTip().removeAll(event.getToolTip());
+            event.getToolTip().clear();
             event.getToolTip().addAll(tooltip);
         }
 
