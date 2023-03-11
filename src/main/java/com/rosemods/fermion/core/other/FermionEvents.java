@@ -28,6 +28,8 @@ public class FermionEvents {
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
+        if (stack.isEmpty()) return;
+        String string = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
 
         //horse armour tooltip
         if (stack.getItem() instanceof HorseArmorItem item && FermionConfig.CLIENT.horseArmourTooltip.get()) {
@@ -50,8 +52,21 @@ public class FermionEvents {
             event.getToolTip().addAll(tooltip);
         }
 
+        //custom tooltips
+        if (FermionConfig.CLIENT.customTooltips.get().contains(string)) {
+            Deque<Component> tooltip = new LinkedList<>(event.getToolTip());
+            Component first = tooltip.peekFirst();
+
+            tooltip.removeFirst();
+            tooltip.addFirst(Component.translatable("tooltip.fermion." + string.replace(':', '.')).withStyle(ChatFormatting.GRAY));
+            tooltip.addFirst(first);
+
+            event.getToolTip().clear();
+            event.getToolTip().addAll(tooltip);
+        }
+
         //food effect tooltip
-        if (FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(ForgeRegistries.ITEMS.getKey(stack.getItem()).toString())) {
+        if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {
             FoodProperties foodProperties = stack.getItem().getFoodProperties(stack, event.getEntity());
 
             if (foodProperties != null && !foodProperties.getEffects().isEmpty())
