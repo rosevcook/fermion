@@ -16,7 +16,6 @@ public class FermionLanguageProvider extends LanguageProvider {
         this.add("tooltip.fermion.dyeable", "Dyeable");
         this.add("tooltip.fermion.horse_armour", "Horse Armor");
         this.add("tooltip.fermion.when_on_horse", "When on Horse:");
-        this.add("tooltip.fermion.hold_shift", "[Hold Shift]");
     }
 
 }

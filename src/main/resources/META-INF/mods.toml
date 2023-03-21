@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[32,)"
 issueTrackerURL = "https://github.com/rosevcook/fermion/issues"
-license = "https://github.com/rosevcook/fermion/blob/main/LICENSE.txt"
+license = "All Rights Reserved"
 
 [[mods]]
     modId = "fermion"

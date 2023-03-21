@@ -20,7 +20,6 @@ public class Fermion {
     public static final String MODID = "fermion";
     public static final Logger LOGGER = LogManager.getLogger(MODID);
 
-
     public Fermion() {
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         final ModLoadingContext context = ModLoadingContext.get();

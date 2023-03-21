@@ -16,7 +16,7 @@ public final class FermionModifiers {
 
     public static void removeItems() {
         FermionConfig.COMMON.hiddenItems.get().forEach(s ->
-                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s)), null, "Attempted to hide item: \"" + s + "\" and failed!"));
+                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s)), null, "Attempted to hide item: \"" + s + "\" and FAILED!"));
     }
 
     public static void modifyGroups() {
@@ -33,7 +33,7 @@ public final class FermionModifiers {
 
         FermionConfig.COMMON.tabModifiers.get().forEach(s -> {
             String[] split = s.split("=");
-            String error = "Attempted to move item: \"" + split[0] + "\", to: \"" + split[1] + "\" and failed!";
+            String error = "Attempted to move item: \"" + split[0] + "\", to: \"" + split[1] + "\" and FAILED!";
 
             if (tabs.containsKey(split[1]))
                 setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]), error);

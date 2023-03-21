@@ -71,8 +71,7 @@ public class FermionEvents {
 
             if (foodProperties != null && !foodProperties.getEffects().isEmpty())
                 for (Pair<MobEffectInstance, Float> effect : foodProperties.getEffects())
-                    event.getToolTip().add(Component.translatable("potion.withDuration",
-                            Component.translatable(effect.getFirst().getDescriptionId()), MobEffectUtil.formatDuration(effect.getFirst(), effect.getSecond())).withStyle(effect.getFirst().getEffect().getCategory().getTooltipFormatting()));
+                    event.getToolTip().add(Component.translatable("potion.withDuration", Component.translatable(effect.getFirst().getDescriptionId()), MobEffectUtil.formatDuration(effect.getFirst(), effect.getSecond())).withStyle(effect.getFirst().getEffect().getCategory().getTooltipFormatting()));
         }
 
     }
