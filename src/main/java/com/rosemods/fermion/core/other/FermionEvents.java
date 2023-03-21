@@ -5,6 +5,8 @@ import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -21,6 +23,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Fermion.MODID)
 public class FermionEvents {
@@ -71,9 +74,20 @@ public class FermionEvents {
 
             if (foodProperties != null && !foodProperties.getEffects().isEmpty())
                 for (Pair<MobEffectInstance, Float> effect : foodProperties.getEffects())
-                    event.getToolTip().add(Component.translatable("potion.withDuration", Component.translatable(effect.getFirst().getDescriptionId()), MobEffectUtil.formatDuration(effect.getFirst(), effect.getSecond())).withStyle(effect.getFirst().getEffect().getCategory().getTooltipFormatting()));
+                    effectTooltip(effect.getFirst(), Math.round(effect.getSecond() * 100), event.getToolTip());
+
         }
 
+    }
+
+    private static void effectTooltip(MobEffectInstance effect, int percent, List<Component> tooltip) {
+        MutableComponent component = Component.translatable(effect.getDescriptionId());
+
+        if (effect.getAmplifier() > 0) component = Component.translatable("potion.withAmplifier", component, Component.translatable("potion.potency." + effect.getAmplifier()));
+        if (effect.getDuration() > 20) component = Component.translatable("potion.withDuration", component, StringUtil.formatTickDuration(effect.getDuration()));
+        if (percent < 100) component = Component.translatable("translation.test.args", component, "(" + percent + "%)");
+
+        tooltip.add(component.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
     }
 
 }
