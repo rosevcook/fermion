@@ -33,12 +33,17 @@ public final class FermionModifiers {
 
         FermionConfig.COMMON.tabModifiers.get().forEach(s -> {
             String[] split = s.split("=");
-            String error = "Attempted to move item: \"" + split[0] + "\", to: \"" + split[1] + "\" and FAILED!";
 
-            if (tabs.containsKey(split[1]))
-                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]), error);
-            else
-                Fermion.LOGGER.error(error);
+            if (split.length != 2)
+                Fermion.LOGGER.error("Unable to parse command: \"" + s + "\"");
+            else {
+                String error = "Attempted to move item: \"" + split[0] + "\", to item tab: \"" + split[1] + "\" and FAILED!";
+
+                if (tabs.containsKey(split[1]))
+                    setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]), error);
+                else
+                    Fermion.LOGGER.error(error);
+            }
         });
 
     }
