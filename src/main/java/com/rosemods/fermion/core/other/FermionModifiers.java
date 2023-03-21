@@ -1,5 +1,6 @@
 package com.rosemods.fermion.core.other;
 
+import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -14,7 +15,8 @@ import java.util.Map;
 public final class FermionModifiers {
 
     public static void removeItems() {
-        FermionConfig.COMMON.hiddenItems.get().forEach(s -> setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s)), null));
+        FermionConfig.COMMON.hiddenItems.get().forEach(s ->
+                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s)), null, "Attempted to hide item: \"" + s + "\" and failed!"));
     }
 
     public static void modifyGroups() {
@@ -31,9 +33,12 @@ public final class FermionModifiers {
 
         FermionConfig.COMMON.tabModifiers.get().forEach(s -> {
             String[] split = s.split("=");
+            String error = "Attempted to move item: \"" + split[0] + "\", to: \"" + split[1] + "\" and failed!";
 
             if (tabs.containsKey(split[1]))
-                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]));
+                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]), error);
+            else
+                Fermion.LOGGER.error(error);
         });
 
     }
@@ -50,9 +55,11 @@ public final class FermionModifiers {
         }
     }
 
-    private static void setTab(Item item, CreativeModeTab tab) {
+    private static void setTab(Item item, CreativeModeTab tab, String error) {
         if (item != null && item != Items.AIR)
             ObfuscationReflectionHelper.setPrivateValue(Item.class, item, tab, "f_41377_");
+        else
+            Fermion.LOGGER.error(error);
     }
 
 }

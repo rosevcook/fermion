@@ -5,23 +5,27 @@ import com.rosemods.fermion.core.other.FermionModifiers;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Mod(Fermion.MODID)
 public class Fermion {
     public static final String MODID = "fermion";
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
+
 
     public Fermion() {
         final IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         final ModLoadingContext context = ModLoadingContext.get();
 
-        bus.addListener(this::commonSetup);
-        bus.addListener(this::clientSetup);
+        bus.addListener(EventPriority.LOWEST, this::commonSetup);
         bus.addListener(this::dataSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -35,10 +39,6 @@ public class Fermion {
             FermionModifiers.hideModdedTabs();
             FermionModifiers.modifyGroups();
         });
-    }
-
-    private void clientSetup(FMLClientSetupEvent event) {
-
     }
 
     private void dataSetup(GatherDataEvent event) {
