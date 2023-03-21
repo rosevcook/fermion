@@ -43,30 +43,12 @@ public class FermionEvents {
         }
 
         //dyeable tooltip
-        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || ((stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark"))) && FermionConfig.CLIENT.dyeableTooltip.get()) {
-            Deque<Component> tooltip = new LinkedList<>(event.getToolTip());
-            Component first = tooltip.peekFirst();
-
-            tooltip.removeFirst();
-            tooltip.addFirst(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY));
-            tooltip.addFirst(first);
-
-            event.getToolTip().clear();
-            event.getToolTip().addAll(tooltip);
-        }
+        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || ((stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark"))) && FermionConfig.CLIENT.dyeableTooltip.get())
+            insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip(), string);
 
         //custom tooltips
-        if (FermionConfig.CLIENT.customTooltips.get().contains(string)) {
-            Deque<Component> tooltip = new LinkedList<>(event.getToolTip());
-            Component first = tooltip.peekFirst();
-
-            tooltip.removeFirst();
-            tooltip.addFirst(Component.translatable("tooltip.fermion." + string.replace(':', '.')).withStyle(ChatFormatting.GRAY));
-            tooltip.addFirst(first);
-
-            event.getToolTip().clear();
-            event.getToolTip().addAll(tooltip);
-        }
+        if (FermionConfig.CLIENT.customTooltips.get().contains(string))
+            insertTooltip(Component.translatable("tooltip.fermion." + string.replace(':', '.')).withStyle(ChatFormatting.GRAY), event.getToolTip(), string);
 
         //food effect tooltip
         if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {
@@ -74,20 +56,31 @@ public class FermionEvents {
 
             if (foodProperties != null && !foodProperties.getEffects().isEmpty())
                 for (Pair<MobEffectInstance, Float> effect : foodProperties.getEffects())
-                    effectTooltip(effect.getFirst(), Math.round(effect.getSecond() * 100), event.getToolTip());
-
+                    event.getToolTip().add(getEffectTooltip(effect.getFirst(), Math.round(effect.getSecond() * 100)));
         }
 
     }
 
-    private static void effectTooltip(MobEffectInstance effect, int percent, List<Component> tooltip) {
+    private static Component getEffectTooltip(MobEffectInstance effect, int percent) {
         MutableComponent component = Component.translatable(effect.getDescriptionId());
 
         if (effect.getAmplifier() > 0) component = Component.translatable("potion.withAmplifier", component, Component.translatable("potion.potency." + effect.getAmplifier()));
         if (effect.getDuration() > 20) component = Component.translatable("potion.withDuration", component, StringUtil.formatTickDuration(effect.getDuration()));
         if (percent < 100) component = Component.translatable("translation.test.args", component, "(" + percent + "%)");
 
-        tooltip.add(component.withStyle(effect.getEffect().getCategory().getTooltipFormatting()));
+        return component.withStyle(effect.getEffect().getCategory().getTooltipFormatting());
+    }
+
+    private static void insertTooltip(Component component, List<Component> tooltip, String item) {
+        Deque<Component> t = new LinkedList<>(tooltip);
+        Component first = t.peekFirst();
+
+        t.removeFirst();
+        t.addFirst(component);
+        t.addFirst(first);
+
+        tooltip.clear();
+        tooltip.addAll(t);
     }
 
 }
