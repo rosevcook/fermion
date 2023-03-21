@@ -52,10 +52,6 @@ public final class FermionModifiers {
         if (FermionConfig.COMMON.hideModdedItemTabs.get()) {
             CreativeModeTab[] tabs = CreativeModeTab.TABS;
             CreativeModeTab.TABS = new CreativeModeTab[12];
-
-            for (int i = 12; i < tabs.length; i++)
-                tabs[i] = null;
-
             System.arraycopy(tabs, 0, CreativeModeTab.TABS, 0, 12);
         }
     }
