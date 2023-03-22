@@ -47,5 +47,4 @@ public class Fermion {
         gen.addProvider(client, new FermionLanguageProvider(event));
     }
 
-
 }
