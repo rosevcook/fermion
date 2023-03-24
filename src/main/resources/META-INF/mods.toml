@@ -10,7 +10,7 @@ license = "All Rights Reserved"
     logoFile = "logo.png"
     displayURL = "https://www.curseforge.com/minecraft/mc-mods/fermion"
     authors = "Rose"
-    description = '''gaga'''
+    description = '''Fermion is a mod that allows you to hide items from creative mode tabs, customize tab icons + many new item tooltips. the perfect vanilla+ mod and modpack making tool.'''
 
 [[dependencies.fermion]]
     modId = "forge"
