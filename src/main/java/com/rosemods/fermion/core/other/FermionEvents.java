@@ -39,7 +39,7 @@ public class FermionEvents {
         }
 
         //dyeable tooltip
-        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || shouldRenderItemFrame(stack, event.getToolTip())) && FermionConfig.CLIENT.dyeableTooltip.get())
+        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || shouldRenderItemFrame(stack)) && FermionConfig.CLIENT.dyeableTooltip.get())
             insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //custom tooltips
@@ -57,8 +57,8 @@ public class FermionEvents {
 
     }
 
-    private static boolean shouldRenderItemFrame(ItemStack stack, List<Component> tooltip) {
-        return (stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark");
+    private static boolean shouldRenderItemFrame(ItemStack stack) {
+        return stack.getTag() == null && (stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark");
     }
 
     private static Component getEffectTooltip(MobEffectInstance effect, int percent) {
