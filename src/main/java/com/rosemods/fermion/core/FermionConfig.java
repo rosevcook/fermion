@@ -24,6 +24,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> hiddenItems;
         public final ConfigValue<List<? extends String>> tabModifiers;
         public final ConfigValue<List<? extends String>> hiddenEnchantments;
+        public final ConfigValue<List<? extends String>> hiddenPotions;
 
         public Common(ForgeConfigSpec.Builder builder) {
             builder.comment("Creative Mode Tab Tweaks").push("tab-tweaks");
@@ -45,7 +46,8 @@ public class FermionConfig {
             this.hideModdedItemTabs = builder.comment("Hides all modded Creative Mode Tabs. (REQUIRES RESTART)").define("Hide Modded Tabs", false);
             this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("Hidden Items", Lists.newArrayList("minecraft:petrified_oak_slab"));
             this.tabModifiers = builder.comment("Moves any item in this list to any specified item tab (REQUIRES RESTART). values: building_blocks, decorations, redstone, transport, misc, food, tools, combat, brewing").define("Item Tab Modifiers", Lists.newArrayList("minecraft:command_block=redstone", "minecraft:repeating_command_block=redstone", "minecraft:chain_command_block=redstone", "minecraft:command_block_minecart=transport", "minecraft:dragon_egg=misc", "minecraft:spawner=misc", "minecraft:structure_block=redstone"));
-            this.hiddenEnchantments = builder.comment("Hides any enchantment from this list from the Creative Mode Inventories").define("Hidden Enchanted Books", Lists.newArrayList());
+            this.hiddenEnchantments = builder.comment("Hides any enchantment from this list from the Creative Mode Inventories.").define("Hidden Enchanted Books", Lists.newArrayList());
+            this.hiddenPotions = builder.comment("Hides any registered potions (NOT EFFECTS) from this list from the Creative Mode Inventories.").define("Hidden Potions", Lists.newArrayList());
 
             builder.pop();
         }
