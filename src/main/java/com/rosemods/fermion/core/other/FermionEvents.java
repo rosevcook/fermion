@@ -10,10 +10,7 @@ import net.minecraft.util.StringUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.DyeableLeatherItem;
-import net.minecraft.world.item.HorseArmorItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -42,12 +39,12 @@ public class FermionEvents {
         }
 
         //dyeable tooltip
-        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || ((stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark"))) && FermionConfig.CLIENT.dyeableTooltip.get())
-            insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip(), string);
+        if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || shouldRenderItemFrame(stack, event.getToolTip())) && FermionConfig.CLIENT.dyeableTooltip.get())
+            insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //custom tooltips
         if (FermionConfig.CLIENT.customTooltips.get().contains(string))
-            insertTooltip(Component.translatable("tooltip.fermion." + string.replace(':', '.')).withStyle(ChatFormatting.GRAY), event.getToolTip(), string);
+            insertTooltip(Component.translatable("tooltip.fermion." + string.replace(':', '.')).withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //food effect tooltip
         if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {
@@ -60,6 +57,10 @@ public class FermionEvents {
 
     }
 
+    private static boolean shouldRenderItemFrame(ItemStack stack, List<Component> tooltip) {
+        return (stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark");
+    }
+
     private static Component getEffectTooltip(MobEffectInstance effect, int percent) {
         MutableComponent component = Component.translatable(effect.getDescriptionId());
 
@@ -70,7 +71,7 @@ public class FermionEvents {
         return component.withStyle(effect.getEffect().getCategory().getTooltipFormatting());
     }
 
-    private static void insertTooltip(Component component, List<Component> tooltip, String item) {
+    private static void insertTooltip(Component component, List<Component> tooltip) {
         Deque<Component> t = new LinkedList<>(tooltip);
         Component first = t.peekFirst();
 
