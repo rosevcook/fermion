@@ -56,11 +56,9 @@ public class FermionEvents {
         }
 
         //pickaxe tooltips
-        if (stack.getItem() instanceof PickaxeItem pickaxe) {
-            String percent =  " " + ((pickaxe.getTier().getLevel() + 1) * 20) + "%";
-            event.getToolTip().add(Component.translatable("tooltip.fermion.pickaxe_power", percent).withStyle(ChatFormatting.DARK_GREEN));
-        }
-
+        if (stack.getItem() instanceof PickaxeItem pickaxe && FermionConfig.CLIENT.pickaxeMiningPower.get())
+            event.getToolTip().add(Component.translatable("tooltip.fermion.pickaxe_power",
+                    " " + ((pickaxe.getTier().getLevel() + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
     }
 
     private static boolean shouldRenderItemFrame(ItemStack stack) {
