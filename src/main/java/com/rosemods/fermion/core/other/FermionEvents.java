@@ -55,6 +55,12 @@ public class FermionEvents {
                     event.getToolTip().add(getEffectTooltip(effect.getFirst(), Math.round(effect.getSecond() * 100)));
         }
 
+        //pickaxe tooltips
+        if (stack.getItem() instanceof PickaxeItem pickaxe) {
+            String percent =  " " + ((pickaxe.getTier().getLevel() + 1) * 20) + "%";
+            event.getToolTip().add(Component.translatable("tooltip.fermion.pickaxe_power", percent).withStyle(ChatFormatting.DARK_GREEN));
+        }
+
     }
 
     private static boolean shouldRenderItemFrame(ItemStack stack) {
