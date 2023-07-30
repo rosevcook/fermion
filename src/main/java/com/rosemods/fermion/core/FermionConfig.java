@@ -64,6 +64,7 @@ public class FermionConfig {
         public final ConfigValue<Boolean> dyeableTooltip;
         public final ConfigValue<Boolean> horseArmourTooltip;
         public final ConfigValue<Boolean> foodEffectTooltip;
+        public final ConfigValue<Boolean> musicDiscTooltip;
         public final ConfigValue<List<? extends String>> foodEffectBlackList;
         public final ConfigValue<List<? extends String>> customTooltips;
 
@@ -72,6 +73,7 @@ public class FermionConfig {
             this.dyeableTooltip = builder.comment("Items that are dyeable with have a tooltip displaying this").define("Dyeable Tooltip", true);
             this.horseArmourTooltip = builder.comment("All Horse Armour items will display their armor stat").define("Horse Armour Tooltip", true);
             this.foodEffectTooltip = builder.comment("Food Item Tooltips display which effects they provide").define("Food Effect Tooltip", true);
+            this.musicDiscTooltip = builder.comment("Appends the Tooltip of a Music Disc to also display the Length of the Song").define("Music Disc Tooltip", true);
             this.foodEffectBlackList = builder.comment("Blacklist of items to display food effects tooltips").define("Food Effect Tooltip BlackList", Lists.newArrayList("farmersdelight:apple_cider", "farmersdelight:cooked_rice", "farmersdelight:bone_broth", "farmersdelight:beef_stew", "farmersdelight:chicken_soup", "farmersdelight:vegetable_soup", "farmersdelight:fish_stew", "farmersdelight:fried_rice", "farmersdelight:pumpkin_soup", "farmersdelight:baked_cod_stew", "farmersdelight:noodle_soup", "farmersdelight:bacon_and_eggs", "farmersdelight:pasta_with_meatballs", "farmersdelight:pasta_with_mutton_chop", "farmersdelight:mushroom_rice", "farmersdelight:roasted_mutton_chops", "farmersdelight:vegetable_noodles", "farmersdelight:steak_and_potatoes", "farmersdelight:ratatouille", "farmersdelight:squid_ink_pasta", "farmersdelight:grilled_salmon", "farmersdelight:roast_chicken", "farmersdelight:stuffed_pumpkin", "farmersdelight:honey_glazed_ham", "farmersdelight:shepherds_pie", "farmersdelight:fruit_salad", "farmersdelight:mixed_salad", "abnormals_delight:slabdish"));
             this.customTooltips = builder.comment("Items In this list will have a custom tooltip you will have to add a translation for").define("Custom Tooltip List", Lists.newArrayList());
             builder.pop();

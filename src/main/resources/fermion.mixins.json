@@ -7,7 +7,8 @@
   "mixins": [
     "CreativeModeTabMixin",
     "EnchantedBookItemMixin",
-    "PotionMixin"
+    "PotionMixin",
+    "RecordItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
