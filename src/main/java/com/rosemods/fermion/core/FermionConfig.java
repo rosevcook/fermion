@@ -19,6 +19,7 @@ public class FermionConfig {
     public static final ForgeConfigSpec COMMON_SPEC;
 
     public static class Common {
+        public final ConfigValue<Boolean> logErrors;
         public final Map<CreativeModeTab, ConfigValue<String>> tabOverrides = new HashMap<>();
         public final ConfigValue<Boolean> hideModdedItemTabs;
         public final ConfigValue<List<? extends String>> hiddenItems;
@@ -28,6 +29,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> blockSoundTypes;
 
         public Common(ForgeConfigSpec.Builder builder) {
+            this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
             builder.comment("Creative Mode Tab Tweaks").push("tab-tweaks");
             builder.comment("Replace the Item Icon for the vanilla Creative Mode Tabs").push("tab-icons");
             this.tabOverrides.put(CreativeModeTab.TAB_BUILDING_BLOCKS, builder.define("Building Blocks Tab Icon", "minecraft:bricks"));

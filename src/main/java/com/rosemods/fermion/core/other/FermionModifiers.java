@@ -18,6 +18,11 @@ import java.util.Map;
 
 public final class FermionModifiers {
 
+    private static void error(String error) {
+        if (FermionConfig.COMMON.logErrors.get())
+            Fermion.LOGGER.error(error);
+    }
+
     // Item Modifiers //
 
     public static void removeItems() {
@@ -41,14 +46,14 @@ public final class FermionModifiers {
             String[] split = s.split("=");
 
             if (split.length != 2)
-                Fermion.LOGGER.error("Unable to parse command: \"" + s + "\"");
+                error("Unable to parse command: \"" + s + "\"");
             else {
                 String error = "Attempted to move item: \"" + split[0] + "\", to item tab: \"" + split[1] + "\" and FAILED!";
 
                 if (tabs.containsKey(split[1]))
                     setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]), error);
                 else
-                    Fermion.LOGGER.error(error);
+                    error(error);
             }
         });
 
@@ -66,7 +71,7 @@ public final class FermionModifiers {
         if (item != null && item != Items.AIR)
             ObfuscationReflectionHelper.setPrivateValue(Item.class, item, tab, "f_41377_");
         else
-            Fermion.LOGGER.error(error);
+            error(error);
     }
 
     // Block Modifiers //
@@ -165,14 +170,14 @@ public final class FermionModifiers {
             String[] split = s.split("=");
 
             if (split.length != 2)
-                Fermion.LOGGER.error("Unable to parse command: \"" + s + "\"");
+                error("Unable to parse command: \"" + s + "\"");
             else {
                 String error = "Attempted to set: \"" + split[0] + "\", to sound type: \"" + split[1] + "\" and FAILED!";
 
                 if (soundTypes.containsKey(split[1]))
                     setSoundType(ForgeRegistries.BLOCKS.getValue(ResourceLocation.tryParse(split[0])), soundTypes.get(split[1]), error);
                 else
-                    Fermion.LOGGER.error(error);
+                    error(error);
             }
         });
     }
@@ -181,7 +186,7 @@ public final class FermionModifiers {
         if (block != null && block != Blocks.AIR)
             ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, block, soundType, "f_60446_");
         else
-            Fermion.LOGGER.error(error);
+            error(error);
     }
 
 }
