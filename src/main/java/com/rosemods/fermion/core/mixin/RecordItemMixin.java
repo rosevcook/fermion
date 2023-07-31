@@ -24,8 +24,7 @@ public class RecordItemMixin {
             RecordItem recordItem = (RecordItem) (Object) this;
             tooltip.add(Component.translatable("potion.withDuration",
                     recordItem.getDisplayName().withStyle(ChatFormatting.GRAY),
-                    Component.literal(StringUtil.formatTickDuration(recordItem.getLengthInTicks()))).withStyle(ChatFormatting.DARK_GRAY)
-            );
+                    Component.literal(StringUtil.formatTickDuration(recordItem.getLengthInTicks()))).withStyle(ChatFormatting.DARK_GRAY));
 
             info.cancel();
         }
