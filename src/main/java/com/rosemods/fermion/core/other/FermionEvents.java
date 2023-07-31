@@ -11,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -67,6 +68,13 @@ public class FermionEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void onRenderTooltipColor(RenderTooltipEvent.Color event) {
+        event.setBackgroundStart(FermionConfig.CLIENT.borderStart.get());
+        event.setBackgroundEnd(FermionConfig.CLIENT.borderEnd.get());
+        event.setBackground(FermionConfig.CLIENT.backgroundColor.get());
+    }
+    
     private static boolean shouldRenderItemFrame(ItemStack stack) {
         return stack.getTag() == null && (stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark");
     }
