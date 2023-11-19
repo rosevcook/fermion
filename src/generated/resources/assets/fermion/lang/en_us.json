@@ -1,7 +1,7 @@
 {
   "tooltip.fermion.dyeable": "Dyeable",
   "tooltip.fermion.horse_armour": "Horse Armor",
-  "tooltip.fermion.mining_power": "%s Mining Power",
-  "tooltip.fermion.mining_speed": "%s Mining Speed",
+  "tooltip.fermion.mining_power": " %s Mining Power",
+  "tooltip.fermion.mining_speed": " %s Mining Speed",
   "tooltip.fermion.when_on_horse": "When on Horse:"
 }

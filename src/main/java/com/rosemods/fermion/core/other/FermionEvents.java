@@ -60,11 +60,11 @@ public class FermionEvents {
         if (stack.getItem() instanceof TieredItem tool) {
             if (tool instanceof PickaxeItem && FermionConfig.CLIENT.pickaxeMiningPower.get())
                 event.getToolTip().add(Component.translatable("tooltip.fermion.mining_power",
-                        " " + ((tool.getTier().getLevel() + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
+                        ((tool.getTier().getLevel() + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
 
             if ((tool instanceof PickaxeItem || tool instanceof ShovelItem || tool instanceof AxeItem || tool instanceof HoeItem) && FermionConfig.CLIENT.toolMiningSpeed.get())
                 event.getToolTip().add(Component.translatable("tooltip.fermion.mining_speed",
-                        " " + (int)tool.getTier().getSpeed()).withStyle(ChatFormatting.DARK_GREEN));
+                        (int)tool.getTier().getSpeed()).withStyle(ChatFormatting.DARK_GREEN));
         }
     }
 
