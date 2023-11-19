@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -59,6 +60,29 @@ public final class FermionModifiers {
 
     }
 
+    public static void modifyItemRarity() {
+        Map<String, Rarity> rarity = new HashMap<>();
+        rarity.put("common", Rarity.COMMON);
+        rarity.put("uncommon", Rarity.UNCOMMON);
+        rarity.put("rare", Rarity.RARE);
+        rarity.put("epic", Rarity.EPIC);
+
+        FermionConfig.COMMON.itemRarity.get().forEach(s -> {
+            String[] split = s.split("=");
+
+            if (split.length != 2)
+                error("Unable to parse command: \"" + s + "\"");
+            else {
+                String error = "Attempted to set: \"" + split[0] + "\", to item rarity: \"" + split[1] + "\" and FAILED!";
+
+                if (rarity.containsKey(split[1]))
+                    setRarity(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), rarity.get(split[1]), error);
+                else
+                    error(error);
+            }
+        });
+    }
+
     public static void hideModdedTabs() {
         if (FermionConfig.COMMON.hideModdedItemTabs.get()) {
             CreativeModeTab[] tabs = CreativeModeTab.TABS;
@@ -70,6 +94,13 @@ public final class FermionModifiers {
     private static void setTab(Item item, CreativeModeTab tab, String error) {
         if (item != null && item != Items.AIR)
             ObfuscationReflectionHelper.setPrivateValue(Item.class, item, tab, "f_41377_");
+        else
+            error(error);
+    }
+
+    private static void setRarity(Item item, Rarity rarity, String error) {
+        if (item != null && item != Items.AIR)
+            ObfuscationReflectionHelper.setPrivateValue(Item.class, item, rarity, "f_41369_");
         else
             error(error);
     }

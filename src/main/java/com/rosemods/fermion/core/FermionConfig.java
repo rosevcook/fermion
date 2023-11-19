@@ -27,6 +27,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> hiddenEnchantments;
         public final ConfigValue<List<? extends String>> hiddenPotions;
         public final ConfigValue<List<? extends String>> blockSoundTypes;
+        public final ConfigValue<List<? extends String>> itemRarity;
 
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
@@ -55,6 +56,10 @@ public class FermionConfig {
 
             builder.comment("Block Tweaks").push("block-tweaks");
             this.blockSoundTypes = builder.comment("Allows the modification of any blocks SoundType (REQUIRES RESTART). \nValues: wood, gravel, grass, lily_pad, stone, metal, glass, wool, sand, snow, powder_snow, ladder, anvil, slime, honey, wet_grass, coral, bamboo, bamboo_sapling, scaffolding, sweet_berry_bush, crop, hard_crop, vine, nether_wart, lantern, stem, nylium, fungus, roots, shroomlight, weeping_vines, twisting_vines, soul_sand, soul_soil, basalt, wart_block, netherrack, nether_bricks, nether_sprouts, nether_ore, bone_block, netherite_block, ancient_debris, lodestone, chain, nether_gold_ore, gilded_blackstone, candle, amethyst, amethyst_cluster, small_amethyst_bud, medium_amethyst_bud, large_amethyst_bud, tuff, calcite, dripstone, pointed_dripstone, copper, cave_vines, spore_blossom, azalea, flowering_azalea, moss_carpet, moss, big_dripleaf, small_dripleaf, rooted_dirt, hanging_roots, azalea_leaves, sculk_sensor, sculk_catalyst, sculk, sculk_vein, sculk_shrieker, glow_lichen, deepslate, deepslate_bricks, deepslate_tiles, polished_deepslate, froglight, frogspawn, mangrove_roots, muddy_mangrove_roots, mud, mud_bricks, packed_mud").define("Block SoundType Overrides", Lists.newArrayList("minecraft:cobweb=wool"));
+            builder.pop();
+
+            builder.comment("Item Tweaks").push("item-tweaks");
+            this.itemRarity = builder.comment("Allows the modification of any items Rarity (REQUIRES RESTART). \nValues: common, uncommon, rare, epic").define("Item Rarity Overrides", Lists.newArrayList(""));
             builder.pop();
         }
 
