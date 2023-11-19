@@ -68,13 +68,6 @@ public class FermionEvents {
         }
     }
 
-    @SubscribeEvent
-    public static void onRenderTooltipColor(RenderTooltipEvent.Color event) {
-        event.setBackgroundStart(FermionConfig.CLIENT.borderStart.get());
-        event.setBackgroundEnd(FermionConfig.CLIENT.borderEnd.get());
-        event.setBackground(FermionConfig.CLIENT.backgroundColor.get());
-    }
-    
     private static boolean shouldRenderItemFrame(ItemStack stack) {
         return stack.getTag() == null && (stack.is(Items.ITEM_FRAME) || stack.is(Items.GLOW_ITEM_FRAME)) && ModList.get().isLoaded("quark");
     }
