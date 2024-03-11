@@ -56,14 +56,13 @@ public class FermionEvents {
         }
 
         //tool tooltips
-        if (stack.getItem() instanceof TieredItem tool) {
+        if (stack.getItem() instanceof DiggerItem tool) {
             if (tool instanceof PickaxeItem pickaxeItem && FermionConfig.CLIENT.pickaxeMiningPower.get())
                 event.getToolTip().add(Component.translatable("tooltip.fermion.mining_power",
-                        ((FermionModifiers.getLevel(pickaxeItem, tool.getTier()) + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
+                        ((FermionModifiers.getLevel(pickaxeItem) + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
 
-            if ((tool instanceof PickaxeItem || tool instanceof ShovelItem || tool instanceof AxeItem || tool instanceof HoeItem) && FermionConfig.CLIENT.toolMiningSpeed.get())
-                event.getToolTip().add(Component.translatable("tooltip.fermion.mining_speed",
-                        (int)tool.getTier().getSpeed()).withStyle(ChatFormatting.DARK_GREEN));
+            if (FermionConfig.CLIENT.toolMiningSpeed.get())
+                event.getToolTip().add(Component.translatable("tooltip.fermion.mining_speed", (int) FermionModifiers.getSpeed(tool)).withStyle(ChatFormatting.DARK_GREEN));
         }
     }
 
@@ -74,9 +73,12 @@ public class FermionEvents {
     private static Component getEffectTooltip(MobEffectInstance effect, int percent) {
         MutableComponent component = Component.translatable(effect.getDescriptionId());
 
-        if (effect.getAmplifier() > 0) component = Component.translatable("potion.withAmplifier", component, Component.translatable("potion.potency." + effect.getAmplifier()));
-        if (effect.getDuration() > 20) component = Component.translatable("potion.withDuration", component, StringUtil.formatTickDuration(effect.getDuration()));
-        if (percent < 100) component = Component.translatable("translation.test.args", component, "(" + percent + "%)");
+        if (effect.getAmplifier() > 0)
+            component = Component.translatable("potion.withAmplifier", component, Component.translatable("potion.potency." + effect.getAmplifier()));
+        if (effect.getDuration() > 20)
+            component = Component.translatable("potion.withDuration", component, StringUtil.formatTickDuration(effect.getDuration()));
+        if (percent < 100)
+            component = Component.translatable("translation.test.args", component, "(" + percent + "%)");
 
         return component.withStyle(effect.getEffect().getCategory().getTooltipFormatting());
     }

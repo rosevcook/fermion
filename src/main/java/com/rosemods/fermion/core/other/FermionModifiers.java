@@ -3,7 +3,10 @@ package com.rosemods.fermion.core.other;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -16,6 +19,7 @@ import java.util.Map;
 
 public final class FermionModifiers {
     public static final Map<DiggerItem, Integer> LEVELS = new HashMap<>();
+    public static final Map<DiggerItem, Float> SPEEDS = new HashMap<>();
 
     private static void error(String error) {
         if (FermionConfig.COMMON.logErrors.get())
@@ -53,8 +57,42 @@ public final class FermionModifiers {
         });
     }
 
-    public static int getLevel(DiggerItem item, Tier tier) {
-        return LEVELS.containsKey(item) ? LEVELS.get(item) : tier.getLevel();
+    public static void modifyMiningSpeeds() {
+        FermionConfig.COMMON.miningSpeed.get().forEach(s -> {
+            String[] split = s.split("=");
+
+            if (split.length != 2)
+                error("Unable to parse command: \"" + s + "\"");
+            else {
+                String error = "Attempted to modify pickaxe item: \"" + split[0] + "\", to mining level: \"" + split[1] + "\" and FAILED!";
+                Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0]));
+
+                if (item instanceof DiggerItem diggerItem) {
+                    float speed;
+
+                    try {
+                        speed = Float.parseFloat(split[1]);
+                    } catch (NumberFormatException e) {
+                        error(error);
+                        return;
+                    }
+
+                    if (speed >= 0)
+                        SPEEDS.put(diggerItem, speed);
+                    else
+                        error(error);
+                } else
+                    error(error);
+            }
+        });
+    }
+
+    public static float getSpeed(DiggerItem item) {
+        return SPEEDS.containsKey(item) ? SPEEDS.get(item) : item.getTier().getSpeed();
+    }
+
+    public static int getLevel(DiggerItem item) {
+        return LEVELS.containsKey(item) ? LEVELS.get(item) : item.getTier().getLevel();
     }
 
     public static void removeItems() {

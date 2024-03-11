@@ -28,6 +28,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> hiddenPotions;
         public final ConfigValue<List<? extends String>> blockSoundTypes;
         public final ConfigValue<List<? extends String>> miningPower;
+        public final ConfigValue<List<? extends String>> miningSpeed;
 
 
         public Common(ForgeConfigSpec.Builder builder) {
@@ -61,6 +62,7 @@ public class FermionConfig {
 
             builder.comment("Item Tweaks").push("item-tweaks");
             this.miningPower = builder.comment("List to modify the Mining Power (level) of a Pickaxe Item. \nwooden pickaxes are level 0, diamond pickaxes are level 3, etc.").define("Mining Power Modifiers", Lists.newArrayList("minecraft:golden_pickaxe=1"));
+            this.miningSpeed = builder.comment("List to modify the Mining Speed of a Tool Item.").define("Mining Speed Modifiers", Lists.newArrayList());
             builder.pop();
         }
 
