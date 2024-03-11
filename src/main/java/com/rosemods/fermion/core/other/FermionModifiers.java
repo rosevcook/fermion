@@ -3,9 +3,7 @@ package com.rosemods.fermion.core.other;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -17,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class FermionModifiers {
+    public static final Map<DiggerItem, Integer> LEVELS = new HashMap<>();
 
     private static void error(String error) {
         if (FermionConfig.COMMON.logErrors.get())
@@ -24,6 +23,39 @@ public final class FermionModifiers {
     }
 
     // Item Modifiers //
+    public static void modifyMiningLevels() {
+        FermionConfig.COMMON.miningPower.get().forEach(s -> {
+            String[] split = s.split("=");
+
+            if (split.length != 2)
+                error("Unable to parse command: \"" + s + "\"");
+            else {
+                String error = "Attempted to modify pickaxe item: \"" + split[0] + "\", to mining level: \"" + split[1] + "\" and FAILED!";
+                Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0]));
+
+                if (item instanceof DiggerItem diggerItem) {
+                    int level;
+
+                    try {
+                        level = Integer.parseInt(split[1]);
+                    } catch (NumberFormatException e) {
+                        error(error);
+                        return;
+                    }
+
+                    if (level >= 0)
+                        LEVELS.put(diggerItem, level);
+                    else
+                        error(error);
+                } else
+                    error(error);
+            }
+        });
+    }
+
+    public static int getLevel(DiggerItem item, Tier tier) {
+        return LEVELS.containsKey(item) ? LEVELS.get(item) : tier.getLevel();
+    }
 
     public static void removeItems() {
         FermionConfig.COMMON.hiddenItems.get().forEach(s ->
@@ -75,7 +107,6 @@ public final class FermionModifiers {
     }
 
     // Block Modifiers //
-
     public static void modifySoundTypes() {
         Map<String, SoundType> soundTypes = new HashMap<>();
         soundTypes.put("wood", SoundType.WOOD);

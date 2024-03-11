@@ -6,7 +6,9 @@
   "refmap": "fermion.refmap.json",
   "mixins": [
     "CreativeModeTabMixin",
+    "DiggerItemMixin",
     "EnchantedBookItemMixin",
+    "ItemStackMixin",
     "PotionMixin",
     "RecordItemMixin"
   ],

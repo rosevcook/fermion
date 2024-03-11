@@ -35,6 +35,7 @@ public class Fermion {
             FermionModifiers.hideModdedTabs();
             FermionModifiers.modifyGroups();
             FermionModifiers.modifySoundTypes();
+            FermionModifiers.modifyMiningLevels();
         });
     }
 

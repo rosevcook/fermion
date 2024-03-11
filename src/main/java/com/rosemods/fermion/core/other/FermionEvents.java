@@ -57,9 +57,9 @@ public class FermionEvents {
 
         //tool tooltips
         if (stack.getItem() instanceof TieredItem tool) {
-            if (tool instanceof PickaxeItem && FermionConfig.CLIENT.pickaxeMiningPower.get())
+            if (tool instanceof PickaxeItem pickaxeItem && FermionConfig.CLIENT.pickaxeMiningPower.get())
                 event.getToolTip().add(Component.translatable("tooltip.fermion.mining_power",
-                        ((tool.getTier().getLevel() + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
+                        ((FermionModifiers.getLevel(pickaxeItem, tool.getTier()) + 1) * 20) + "%").withStyle(ChatFormatting.DARK_GREEN));
 
             if ((tool instanceof PickaxeItem || tool instanceof ShovelItem || tool instanceof AxeItem || tool instanceof HoeItem) && FermionConfig.CLIENT.toolMiningSpeed.get())
                 event.getToolTip().add(Component.translatable("tooltip.fermion.mining_speed",
