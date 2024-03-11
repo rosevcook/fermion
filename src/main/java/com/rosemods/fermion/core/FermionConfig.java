@@ -27,7 +27,6 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> hiddenEnchantments;
         public final ConfigValue<List<? extends String>> hiddenPotions;
         public final ConfigValue<List<? extends String>> blockSoundTypes;
-        public final ConfigValue<List<? extends String>> itemRarity;
 
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
@@ -59,7 +58,6 @@ public class FermionConfig {
             builder.pop();
 
             builder.comment("Item Tweaks").push("item-tweaks");
-            this.itemRarity = builder.comment("Allows the modification of any items Rarity (REQUIRES RESTART). \nValues: common, uncommon, rare, epic").define("Item Rarity Overrides", Lists.newArrayList(""));
             builder.pop();
         }
 

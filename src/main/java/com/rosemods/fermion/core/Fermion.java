@@ -33,7 +33,6 @@ public class Fermion {
         event.enqueueWork(() -> {
             FermionModifiers.removeItems();
             FermionModifiers.hideModdedTabs();
-            FermionModifiers.modifyItemRarity();
             FermionModifiers.modifyGroups();
             FermionModifiers.modifySoundTypes();
         });

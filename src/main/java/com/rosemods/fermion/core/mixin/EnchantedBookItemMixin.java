@@ -17,20 +17,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(EnchantedBookItem.class)
 public class EnchantedBookItemMixin {
-
     @Inject(method = "fillItemCategory", at = @At("HEAD"), cancellable = true)
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items, CallbackInfo info) {
         Item item = (Item) (Object) this;
 
-        if (tab == CreativeModeTab.TAB_SEARCH) {
-            for(Enchantment enchantment : Registry.ENCHANTMENT)
-                if (enchantment.allowedInCreativeTab(item, tab) && !FermionConfig.COMMON.hiddenEnchantments.get().contains(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).toString()))
-                    for(int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); ++i)
-                        items.add(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, i)));
-        } else if (tab.getEnchantmentCategories().length != 0)
-            for(Enchantment enchantment : Registry.ENCHANTMENT)
-                if (enchantment.allowedInCreativeTab(item, tab) && !FermionConfig.COMMON.hiddenEnchantments.get().contains(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).toString()))
-                    items.add(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, enchantment.getMaxLevel())));
+        if (!FermionConfig.COMMON.hiddenItems.get().contains("minecraft:enchanted_book"))
+            if (tab == CreativeModeTab.TAB_SEARCH) {
+                for (Enchantment enchantment : Registry.ENCHANTMENT)
+                    if (enchantment.allowedInCreativeTab(item, tab) && !FermionConfig.COMMON.hiddenEnchantments.get().contains(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).toString()))
+                        for (int i = enchantment.getMinLevel(); i <= enchantment.getMaxLevel(); ++i)
+                            items.add(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, i)));
+            } else if (tab.getEnchantmentCategories().length != 0)
+                for (Enchantment enchantment : Registry.ENCHANTMENT)
+                    if (enchantment.allowedInCreativeTab(item, tab) && !FermionConfig.COMMON.hiddenEnchantments.get().contains(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).toString()))
+                        items.add(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(enchantment, enchantment.getMaxLevel())));
 
         info.cancel();
     }
