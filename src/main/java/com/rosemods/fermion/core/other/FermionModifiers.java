@@ -47,10 +47,7 @@ public final class FermionModifiers {
                         return;
                     }
 
-                    if (level >= 0)
-                        LEVELS.put(diggerItem, level);
-                    else
-                        error(error);
+                    LEVELS.put(diggerItem, level);
                 } else
                     error(error);
             }
@@ -64,7 +61,7 @@ public final class FermionModifiers {
             if (split.length != 2)
                 error("Unable to parse command: \"" + s + "\"");
             else {
-                String error = "Attempted to modify pickaxe item: \"" + split[0] + "\", to mining level: \"" + split[1] + "\" and FAILED!";
+                String error = "Attempted to modify tool item: \"" + split[0] + "\", to mining speed: \"" + split[1] + "\" and FAILED!";
                 Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0]));
 
                 if (item instanceof DiggerItem diggerItem) {

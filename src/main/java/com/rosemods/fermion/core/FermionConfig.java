@@ -30,7 +30,6 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> miningPower;
         public final ConfigValue<List<? extends String>> miningSpeed;
 
-
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
             builder.comment("Creative Mode Tab Tweaks").push("tab-tweaks");
@@ -52,8 +51,11 @@ public class FermionConfig {
             this.hideModdedItemTabs = builder.comment("Hides all modded Creative Mode Tabs. (REQUIRES RESTART)").define("Hide Modded Tabs", false);
             this.hiddenItems = builder.comment("Hides any item in this list from the Creative Mode Inventories. (REQUIRES RESTART)").define("Hidden Items", Lists.newArrayList("minecraft:petrified_oak_slab"));
             this.tabModifiers = builder.comment("Moves any item in this list to any specified item tab (REQUIRES RESTART). \nValues: building_blocks, decorations, redstone, transport, misc, food, tools, combat, brewing").define("Item Tab Modifiers", Lists.newArrayList("minecraft:command_block=redstone", "minecraft:repeating_command_block=redstone", "minecraft:chain_command_block=redstone", "minecraft:command_block_minecart=transport", "minecraft:dragon_egg=misc", "minecraft:spawner=misc", "minecraft:structure_block=redstone"));
-            this.hiddenEnchantments = builder.comment("Hides any enchantment from this list from the Creative Mode Inventories.").define("Hidden Enchanted Books", Lists.newArrayList());
             this.hiddenPotions = builder.comment("Hides any registered potions (NOT EFFECTS) from this list from the Creative Mode Inventories.").define("Hidden Potions", Lists.newArrayList());
+            builder.pop();
+
+            builder.comment("Enchantment Tweaks").push("enchantment-tweaks");
+            this.hiddenEnchantments = builder.comment("Removes any enchantment in this list from the Game.").define("Removed Enchantments", Lists.newArrayList());
             builder.pop();
 
             builder.comment("Block Tweaks").push("block-tweaks");

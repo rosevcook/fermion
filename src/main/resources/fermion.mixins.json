@@ -8,9 +8,12 @@
     "CreativeModeTabMixin",
     "DiggerItemMixin",
     "EnchantedBookItemMixin",
+    "EnchantmentHelperMixin",
+    "EnchantRandomlyFunctionMixin",
     "ItemStackMixin",
     "PotionMixin",
-    "RecordItemMixin"
+    "RecordItemMixin",
+    "SetEnchantmentsFunctionMixin"
   ],
   "injectors": {
     "defaultRequire": 1
