@@ -78,7 +78,7 @@ public class FermionConfig {
         public final ConfigValue<Boolean> pickaxeMiningPower;
         public final ConfigValue<Boolean> toolMiningSpeed;
         public final ConfigValue<List<? extends String>> foodEffectBlackList;
-        public final ConfigValue<List<? extends String>> customTooltips;
+        private final ConfigValue<List<? extends String>> customTooltips;
 
         public Client(ForgeConfigSpec.Builder builder) {
             builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
@@ -91,6 +91,20 @@ public class FermionConfig {
             this.foodEffectBlackList = builder.comment("Blacklist of items to display food effects tooltips").define("Food Effect Tooltip BlackList", Lists.newArrayList("farmersdelight:apple_cider", "farmersdelight:cooked_rice", "farmersdelight:bone_broth", "farmersdelight:beef_stew", "farmersdelight:chicken_soup", "farmersdelight:vegetable_soup", "farmersdelight:fish_stew", "farmersdelight:fried_rice", "farmersdelight:pumpkin_soup", "farmersdelight:baked_cod_stew", "farmersdelight:noodle_soup", "farmersdelight:bacon_and_eggs", "farmersdelight:pasta_with_meatballs", "farmersdelight:pasta_with_mutton_chop", "farmersdelight:mushroom_rice", "farmersdelight:roasted_mutton_chops", "farmersdelight:vegetable_noodles", "farmersdelight:steak_and_potatoes", "farmersdelight:ratatouille", "farmersdelight:squid_ink_pasta", "farmersdelight:grilled_salmon", "farmersdelight:roast_chicken", "farmersdelight:stuffed_pumpkin", "farmersdelight:honey_glazed_ham", "farmersdelight:shepherds_pie", "farmersdelight:fruit_salad", "farmersdelight:mixed_salad", "abnormals_delight:slabdish"));
             this.customTooltips = builder.comment("Items In this list will have a custom tooltip you will have to add a translation for").define("Custom Tooltip List", Lists.newArrayList());
             builder.pop();
+        }
+
+        public Map<String, String> getCustomTooltips() {
+            HashMap<String, String> result = new HashMap<>();
+
+            this.customTooltips.get().forEach(s -> {
+                if (s.contains("=")) {
+                    String[] split = s.split("=");
+                    result.put(split[0], split[1]);
+                } else
+                    result.put(s, s.replace(':', '.'));
+            });
+
+            return result;
         }
 
     }
