@@ -136,9 +136,10 @@ public final class FermionModifiers {
 
     private static void setTab(Item item, CreativeModeTab tab, String error) {
         if (item != null && item != Items.AIR) {
-            if (ObfuscationReflectionHelper.getPrivateValue(Item.class, item, "f_41377_") == tab)
-                error("Cannot hide item: \"" + ForgeRegistries.ITEMS.getKey(item).toString() + "\" as it is already hidden!.");
-            else
+            if (ObfuscationReflectionHelper.getPrivateValue(Item.class, item, "f_41377_") == tab) {
+                String name = ForgeRegistries.ITEMS.getKey(item).toString();
+                error(tab == null ? "Cannot hide item: \"" + name  + "\" as it is already hidden!." : "Cannot move item: \"" + name  + "\" as it is already in the specified tab!.");
+            } else
                 ObfuscationReflectionHelper.setPrivateValue(Item.class, item, tab, "f_41377_");
         } else
             error(error);
