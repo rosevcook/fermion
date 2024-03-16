@@ -86,15 +86,18 @@ public class FermionEvents {
     }
 
     private static void insertTooltip(Component component, List<Component> tooltip) {
-        Deque<Component> t = new LinkedList<>(tooltip);
-        Component first = t.peekFirst();
+        if (tooltip.size() > 1) {
+            Deque<Component> t = new LinkedList<>(tooltip);
+            Component first = t.peekFirst();
 
-        t.removeFirst();
-        t.addFirst(component);
-        t.addFirst(first);
+            t.removeFirst();
+            t.addFirst(component);
+            t.addFirst(first);
 
-        tooltip.clear();
-        tooltip.addAll(t);
+            tooltip.clear();
+            tooltip.addAll(t);
+        } else
+            tooltip.add(component);
     }
 
 }
