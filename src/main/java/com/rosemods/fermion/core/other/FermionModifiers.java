@@ -34,7 +34,7 @@ public final class FermionModifiers {
             if (split.length != 2)
                 error("Unable to parse command: \"" + s + "\"");
             else {
-                String error = "Attempted to modify pickaxe item: \"" + split[0] + "\", to mining level: \"" + split[1] + "\" and FAILED!";
+                String error = "Attempted to modify pickaxe item: \"" + split[0] + "\", to mining level: \"" + split[1] + "\" and failed!";
                 Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0]));
 
                 if (item instanceof DiggerItem diggerItem) {
@@ -61,7 +61,7 @@ public final class FermionModifiers {
             if (split.length != 2)
                 error("Unable to parse command: \"" + s + "\"");
             else {
-                String error = "Attempted to modify tool item: \"" + split[0] + "\", to mining speed: \"" + split[1] + "\" and FAILED!";
+                String error = "Attempted to modify tool item: \"" + split[0] + "\", to mining speed: \"" + split[1] + "\" and failed!";
                 Item item = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0]));
 
                 if (item instanceof DiggerItem diggerItem) {
@@ -94,7 +94,7 @@ public final class FermionModifiers {
 
     public static void removeItems() {
         FermionConfig.COMMON.hiddenItems.get().forEach(s ->
-                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s)), null, "Attempted to hide item: \"" + s + "\" and FAILED!"));
+                setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(s)), null, "Attempted to hide item: \"" + s + "\" and failed!"));
     }
 
     public static void modifyGroups() {
@@ -115,7 +115,7 @@ public final class FermionModifiers {
             if (split.length != 2)
                 error("Unable to parse command: \"" + s + "\"");
             else {
-                String error = "Attempted to move item: \"" + split[0] + "\", to item tab: \"" + split[1] + "\" and FAILED!";
+                String error = "Attempted to move item: \"" + split[0] + "\", to item tab: \"" + split[1] + "\" and failed!";
 
                 if (tabs.containsKey(split[1]))
                     setTab(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(split[0])), tabs.get(split[1]), error);
@@ -242,7 +242,7 @@ public final class FermionModifiers {
             if (split.length != 2)
                 error("Unable to parse command: \"" + s + "\"");
             else {
-                String error = "Attempted to set: \"" + split[0] + "\", to sound type: \"" + split[1] + "\" and FAILED!";
+                String error = "Attempted to set: \"" + split[0] + "\", to sound type: \"" + split[1] + "\" and failed!";
 
                 if (soundTypes.containsKey(split[1]))
                     setSoundType(ForgeRegistries.BLOCKS.getValue(ResourceLocation.tryParse(split[0])), soundTypes.get(split[1]), error);

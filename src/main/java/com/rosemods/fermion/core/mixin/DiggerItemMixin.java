@@ -1,5 +1,6 @@
 package com.rosemods.fermion.core.mixin;
 
+import com.rosemods.fermion.core.other.FermionBlockTags;
 import com.rosemods.fermion.core.other.FermionModifiers;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -33,6 +34,8 @@ public class DiggerItemMixin {
         else if (i < 2 && state.is(BlockTags.NEEDS_IRON_TOOL))
             info.setReturnValue(false);
         else if (i < 1 && state.is(BlockTags.NEEDS_STONE_TOOL))
+            info.setReturnValue(false);
+        else if (i < 0 && state.is(FermionBlockTags.NEED_WOODEN_TOOL))
             info.setReturnValue(false);
         else
             info.setReturnValue(state.is(this.blocks));
