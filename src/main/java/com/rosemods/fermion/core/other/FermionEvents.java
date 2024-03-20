@@ -43,10 +43,15 @@ public class FermionEvents {
         if (((stack.getItem() instanceof DyeableLeatherItem item && !item.hasCustomColor(stack)) || shouldRenderItemFrame(stack)) && FermionConfig.CLIENT.dyeableTooltip.get())
             insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
+        //brewing ingredient tooltip
+        if (FermionConfig.CLIENT.brewingTooltip.get() && FermionModifiers.POTION_INGREDIENTS.contains(stack.getItem()) && !FermionConfig.CLIENT.brewingTooltipBlackList.get().contains(string))
+            insertTooltip(Component.translatable("tooltip.fermion.brewing_ingredient").withStyle(ChatFormatting.GRAY), event.getToolTip());
+
         //custom tooltips
         Map<String, String> tooltips = FermionConfig.CLIENT.getCustomTooltips();
         if (tooltips.containsKey(string))
             insertTooltip(Component.translatable("tooltip.fermion." + tooltips.get(string)).withStyle(ChatFormatting.GRAY), event.getToolTip());
+
 
         //food effect tooltip
         if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {

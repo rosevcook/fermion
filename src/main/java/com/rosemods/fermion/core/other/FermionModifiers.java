@@ -13,13 +13,16 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.compress.utils.Lists;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class FermionModifiers {
     public static final Map<DiggerItem, Integer> LEVELS = new HashMap<>();
     public static final Map<DiggerItem, Float> SPEEDS = new HashMap<>();
+    public static final List<Item> POTION_INGREDIENTS = Lists.newArrayList();
 
     private static void error(String error) {
         if (FermionConfig.COMMON.logErrors.get())
