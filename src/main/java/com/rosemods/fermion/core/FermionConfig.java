@@ -66,6 +66,10 @@ public class FermionConfig {
             this.miningPower = builder.comment("List to modify the Mining Power (level) of a Pickaxe Item. \nwooden pickaxes are level 0, diamond pickaxes are level 3, etc.").define("Mining Power Modifiers", Lists.newArrayList("minecraft:golden_pickaxe=1"));
             this.miningSpeed = builder.comment("List to modify the Mining Speed of a Tool Item.").define("Mining Speed Modifiers", Lists.newArrayList());
             builder.pop();
+
+            builder.comment("Anvil Tweaks").push("anvil-tweaks");
+
+            builder.pop();
         }
 
     }

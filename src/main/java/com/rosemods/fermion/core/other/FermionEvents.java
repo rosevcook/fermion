@@ -50,7 +50,7 @@ public class FermionEvents {
         //custom tooltips
         Map<String, String> tooltips = FermionConfig.CLIENT.getCustomTooltips();
         if (tooltips.containsKey(string))
-            insertTooltip(Component.translatable("tooltip.fermion." + tooltips.get(string)).withStyle(ChatFormatting.GRAY), event.getToolTip());
+            event.getToolTip().add(Component.translatable("tooltip.fermion." + tooltips.get(string)).withStyle(ChatFormatting.GRAY));
 
 
         //food effect tooltip
