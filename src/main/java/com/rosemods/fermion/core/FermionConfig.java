@@ -84,7 +84,7 @@ public class FermionConfig {
         public final ConfigValue<Boolean> musicDiscTooltip;
         public final ConfigValue<Boolean> pickaxeMiningPower;
         public final ConfigValue<Boolean> toolMiningSpeed;
-        private final ConfigValue<List<? extends String>> customTooltips;
+        public final ConfigValue<List<? extends String>> customTooltips;
 
         public Client(ForgeConfigSpec.Builder builder) {
             builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
@@ -99,20 +99,6 @@ public class FermionConfig {
             this.toolMiningSpeed = builder.comment("Displays the Mining Speed of the Tool").define("Tool Mining Speed", true);
             this.customTooltips = builder.comment("Items In this list will have a custom tooltip you will have to add a translation for").define("Custom Tooltip List", Lists.newArrayList());
             builder.pop();
-        }
-
-        public Map<String, String> getCustomTooltips() {
-            HashMap<String, String> result = new HashMap<>();
-
-            this.customTooltips.get().forEach(s -> {
-                if (s.contains("=")) {
-                    String[] split = s.split("=");
-                    result.put(split[0], split[1]);
-                } else
-                    result.put(s, s.replace(':', '.'));
-            });
-
-            return result;
         }
 
     }

@@ -17,10 +17,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Fermion.MODID)
 public class FermionEvents {
@@ -48,10 +45,7 @@ public class FermionEvents {
             insertTooltip(Component.translatable("tooltip.fermion.brewing_ingredient").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //custom tooltips
-        Map<String, String> tooltips = FermionConfig.CLIENT.getCustomTooltips();
-        if (tooltips.containsKey(string))
-            event.getToolTip().add(Component.translatable("tooltip.fermion." + tooltips.get(string)).withStyle(ChatFormatting.GRAY));
-
+        doCustomTooltips(event, string);
 
         //food effect tooltip
         if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {
@@ -70,6 +64,37 @@ public class FermionEvents {
 
             if (FermionConfig.CLIENT.toolMiningSpeed.get())
                 event.getToolTip().add(Component.translatable("tooltip.fermion.mining_speed", (int) FermionModifiers.getSpeed(tool)).withStyle(ChatFormatting.DARK_GREEN));
+        }
+    }
+
+    private static void doCustomTooltips(ItemTooltipEvent event, String string) {
+        Map<String, Integer> map = new HashMap<>();
+        for (String s : FermionConfig.CLIENT.customTooltips.get()) {
+            String registry = s;
+            String tooltip = s;
+
+            if (s.contains("=")) {
+                String[] split = s.split("=");
+                registry = split[0];
+                tooltip = split[1];
+            } else
+                tooltip = tooltip.replace(':', '.');
+
+            if (registry.equals(string)) {
+                int level = 0;
+                if (!map.containsKey(registry)) {
+                    map.put(registry, 0);
+                } else {
+                    level = map.get(registry);
+                    map.replace(registry, level + 1);
+                }
+                String component = "tooltip.fermion." + tooltip;
+
+                if (level > 0)
+                    component += level;
+
+                event.getToolTip().add(Component.translatable(component).withStyle(ChatFormatting.GRAY));
+            }
         }
     }
 
