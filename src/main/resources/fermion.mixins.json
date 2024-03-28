@@ -6,6 +6,8 @@
   "refmap": "fermion.refmap.json",
   "mixins": [
     "AnvilMenuMixin",
+    "BrewingStandBlockEntityMixin",
+    "BrewingStandMenuFuelSlotMixin",
     "CreativeModeTabMixin",
     "DiggerItemMixin",
     "EnchantedBookItemMixin",

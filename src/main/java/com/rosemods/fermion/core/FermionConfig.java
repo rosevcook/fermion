@@ -1,10 +1,13 @@
 package com.rosemods.fermion.core;
 
 import com.google.common.collect.Lists;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.HashMap;
@@ -29,6 +32,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> blockSoundTypes;
         public final ConfigValue<List<? extends String>> miningPower;
         public final ConfigValue<List<? extends String>> miningSpeed;
+        private final ConfigValue<String> brewingFuel;
 
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
@@ -67,9 +71,17 @@ public class FermionConfig {
             this.miningSpeed = builder.comment("List to modify the Mining Speed of a Tool Item.").define("Mining Speed Modifiers", Lists.newArrayList());
             builder.pop();
 
+            builder.comment("Brewing Tweaks").push("brewing-tweaks");
+            this.brewingFuel = builder.comment("The item used as a fuel for brewing stands.").define("Brewing Fuel", "minecraft:blaze_powder");
+            builder.pop();
+
             builder.comment("Anvil Tweaks").push("anvil-tweaks");
 
             builder.pop();
+        }
+
+        public Item getBrewingFuel() {
+            return ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse(this.brewingFuel.get()));
         }
 
     }
