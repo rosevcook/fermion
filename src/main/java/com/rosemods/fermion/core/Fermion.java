@@ -2,8 +2,7 @@ package com.rosemods.fermion.core;
 
 import com.rosemods.fermion.core.data.client.FermionLanguageProvider;
 import com.rosemods.fermion.core.other.FermionModifiers;
-import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -12,6 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +27,6 @@ public class Fermion {
         bus.addListener(EventPriority.LOWEST, this::commonSetup);
         bus.addListener(this::dataSetup);
 
-        MinecraftForge.EVENT_BUS.register(this);
         context.registerConfig(ModConfig.Type.COMMON, FermionConfig.COMMON_SPEC);
         context.registerConfig(ModConfig.Type.CLIENT, FermionConfig.CLIENT_SPEC);
     }
@@ -37,14 +36,19 @@ public class Fermion {
             FermionModifiers.removeItems();
             FermionModifiers.hideModdedTabs();
             FermionModifiers.modifyGroups();
+            FermionModifiers.modifySoundTypes();
+            FermionModifiers.modifyMiningLevels();
+            FermionModifiers.modifyMiningSpeeds();
         });
     }
 
     private void dataSetup(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator();
-        boolean client = event.includeClient();
+        event.getGenerator().addProvider(event.includeClient(), new FermionLanguageProvider(event));
+    }
 
-        gen.addProvider(client, new FermionLanguageProvider(event));
+    public static boolean isEnchantmentHidden(Enchantment enchantment) {
+        return FermionConfig.COMMON.hiddenEnchantments.get().contains("*")
+                || FermionConfig.COMMON.hiddenEnchantments.get().contains(ForgeRegistries.ENCHANTMENTS.getKey(enchantment).toString());
     }
 
 }
