@@ -32,7 +32,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> blockSoundTypes;
         public final ConfigValue<List<? extends String>> miningPower;
         public final ConfigValue<List<? extends String>> miningSpeed;
-        public final ConfigValue<String> brewingFuel;
+        private final ConfigValue<String> brewingFuel;
 
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);

@@ -41,7 +41,7 @@ public class FermionEvents {
             insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //brewing ingredient tooltip
-        if (FermionConfig.CLIENT.brewingTooltip.get() && (FermionModifiers.POTION_INGREDIENTS.contains(stack.getItem()) || FermionConfig.COMMON.brewingFuel.get() == string) && !FermionConfig.CLIENT.brewingTooltipBlackList.get().contains(string))
+        if (FermionConfig.CLIENT.brewingTooltip.get() && (FermionModifiers.POTION_INGREDIENTS.contains(stack.getItem()) || stack.is(FermionConfig.COMMON.getBrewingFuel())) && !FermionConfig.CLIENT.brewingTooltipBlackList.get().contains(string))
             insertTooltip(Component.translatable("tooltip.fermion.brewing_ingredient").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //custom tooltips
