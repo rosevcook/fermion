@@ -48,8 +48,8 @@ public class FermionEvents {
         doCustomTooltips(event, string);
 
         //hidden item
-        if (FermionConfig.CLIENT.hiddenItemTooltip.get())
-            event.getToolTip().add(Component.translatable("tooltip.fermion.hidden_item").withStyle(ChatFormatting.RED));
+        if (FermionConfig.CLIENT.hiddenItemTooltip.get() && FermionConfig.COMMON.hiddenItems.get().contains(string))
+            insertTooltip(Component.translatable("tooltip.fermion.hidden_item").withStyle(ChatFormatting.RED), event.getToolTip());
 
         //food effect tooltip
         if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {
