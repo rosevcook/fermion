@@ -32,7 +32,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> blockSoundTypes;
         public final ConfigValue<List<? extends String>> miningPower;
         public final ConfigValue<List<? extends String>> miningSpeed;
-        private final ConfigValue<String> brewingFuel;
+        public final ConfigValue<String> brewingFuel;
 
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
@@ -97,6 +97,7 @@ public class FermionConfig {
         public final ConfigValue<Boolean> pickaxeMiningPower;
         public final ConfigValue<Boolean> toolMiningSpeed;
         public final ConfigValue<List<? extends String>> customTooltips;
+        public final ConfigValue<Boolean> hiddenItemTooltip;
 
         public Client(ForgeConfigSpec.Builder builder) {
             builder.comment("Extra tooltips for items that displays helpful information").push("tooltips");
@@ -110,6 +111,7 @@ public class FermionConfig {
             this.pickaxeMiningPower = builder.comment("Displays the Mining Level of the Pickaxe as a Percentage").define("Pickaxe Mining Power", true);
             this.toolMiningSpeed = builder.comment("Displays the Mining Speed of the Tool").define("Tool Mining Speed", true);
             this.customTooltips = builder.comment("Items In this list will have a custom tooltip you will have to add a translation for").define("Custom Tooltip List", Lists.newArrayList());
+            this.hiddenItemTooltip = builder.comment("If Items hidden with fermion should contain a tooltip displaying that the item is hidden.").define("Hidden Item Tooltip", true);
             builder.pop();
         }
 

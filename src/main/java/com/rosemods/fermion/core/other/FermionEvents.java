@@ -41,11 +41,15 @@ public class FermionEvents {
             insertTooltip(Component.translatable("tooltip.fermion.dyeable").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //brewing ingredient tooltip
-        if (FermionConfig.CLIENT.brewingTooltip.get() && FermionModifiers.POTION_INGREDIENTS.contains(stack.getItem()) && !FermionConfig.CLIENT.brewingTooltipBlackList.get().contains(string))
+        if (FermionConfig.CLIENT.brewingTooltip.get() && (FermionModifiers.POTION_INGREDIENTS.contains(stack.getItem()) || FermionConfig.COMMON.brewingFuel.get() == string) && !FermionConfig.CLIENT.brewingTooltipBlackList.get().contains(string))
             insertTooltip(Component.translatable("tooltip.fermion.brewing_ingredient").withStyle(ChatFormatting.GRAY), event.getToolTip());
 
         //custom tooltips
         doCustomTooltips(event, string);
+
+        //hidden item
+        if (FermionConfig.CLIENT.hiddenItemTooltip.get())
+            event.getToolTip().add(Component.translatable("tooltip.fermion.hidden_item").withStyle(ChatFormatting.RED));
 
         //food effect tooltip
         if (stack.getItem().isEdible() && FermionConfig.CLIENT.foodEffectTooltip.get() && !FermionConfig.CLIENT.foodEffectBlackList.get().contains(string)) {
