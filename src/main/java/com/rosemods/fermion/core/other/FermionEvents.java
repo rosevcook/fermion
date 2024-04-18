@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.StringUtil;
@@ -30,7 +31,7 @@ public class FermionEvents {
 
         //horse armour tooltip
         if (stack.getItem() instanceof HorseArmorItem item && FermionConfig.CLIENT.horseArmourTooltip.get()) {
-            event.getToolTip().add(Component.literal(""));
+            event.getToolTip().add(CommonComponents.EMPTY);
             event.getToolTip().add(Component.translatable("tooltip.fermion.when_on_horse").withStyle(ChatFormatting.GRAY));
             event.getToolTip().add((Component.translatable("attribute.modifier.plus." + AttributeModifier.Operation.ADDITION.toValue(),
                     ItemStack.ATTRIBUTE_MODIFIER_FORMAT.format(item.getProtection()), Component.translatable("tooltip.fermion.horse_armour"))).withStyle(ChatFormatting.BLUE));
@@ -86,9 +87,9 @@ public class FermionEvents {
 
             if (registry.equals(string)) {
                 int level = 0;
-                if (!map.containsKey(registry)) {
+                if (!map.containsKey(registry))
                     map.put(registry, 0);
-                } else {
+                else {
                     level = map.get(registry);
                     map.replace(registry, level + 1);
                 }
