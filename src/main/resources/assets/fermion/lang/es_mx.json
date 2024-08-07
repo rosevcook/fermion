@@ -1,7 +1,9 @@
 {
+    "tooltip.fermion.brewing_ingredient": "Ingrediente de poción",
     "tooltip.fermion.dyeable": "Se puede colorear",
     "tooltip.fermion.horse_armour": "Armadura de caballo",
-    "tooltip.fermion.mining_power": " %s Poder para minar",
-    "tooltip.fermion.mining_speed": " %s Velocidad para minar",
+    "tooltip.fermion.hidden_item": "Objeto oculto",
+    "tooltip.fermion.mining_power": " %s poder para minar",
+    "tooltip.fermion.mining_speed": " %s velocidad al minar",
     "tooltip.fermion.when_on_horse": "Cuando se equipa a un caballo:"
   }
