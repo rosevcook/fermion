@@ -1,5 +1,6 @@
 package com.rosemods.fermion.core.other;
 
+import com.google.common.collect.Lists;
 import com.rosemods.fermion.core.Fermion;
 import com.rosemods.fermion.core.FermionConfig;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.compress.utils.Lists;
 
 import java.util.HashMap;
 import java.util.List;
