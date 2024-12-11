@@ -9,9 +9,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.StringUtil;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -22,6 +26,18 @@ import java.util.*;
 
 @Mod.EventBusSubscriber(modid = Fermion.MODID)
 public class FermionEvents {
+
+    @SubscribeEvent
+    static void entityJoinWorld(EntityJoinLevelEvent e) {
+        double speed = FermionConfig.COMMON.playerSpeed.get();
+
+        if (speed != 0.1d && e.getEntity() instanceof Player player) {
+            AttributeInstance instance = player.getAttribute(Attributes.MOVEMENT_SPEED);
+
+            if (instance != null)
+                instance.setBaseValue(speed);
+        }
+    }
 
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {

@@ -33,6 +33,7 @@ public class FermionConfig {
         public final ConfigValue<List<? extends String>> miningPower;
         public final ConfigValue<List<? extends String>> miningSpeed;
         private final ConfigValue<String> brewingFuel;
+        public final ConfigValue<Double> playerSpeed;
 
         public Common(ForgeConfigSpec.Builder builder) {
             this.logErrors = builder.comment("If any syntax errors by the user should be logged in latest.log when launched").define("Log Errors", true);
@@ -73,6 +74,10 @@ public class FermionConfig {
 
             builder.comment("Brewing Tweaks").push("brewing-tweaks");
             this.brewingFuel = builder.comment("The item used as a fuel for brewing stands.").define("Brewing Fuel", "minecraft:blaze_powder");
+            builder.pop();
+
+            builder.comment("Entity Tweaks").push("entity-tweaks");
+            this.playerSpeed = builder.comment("Player base movement speed attribute; default: 0.1").define("Player Base Speed", 0.1d);
             builder.pop();
 
             builder.comment("Anvil Tweaks").push("anvil-tweaks");
