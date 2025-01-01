@@ -49,7 +49,7 @@ public abstract class ItemStackMixin {
 
     @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Multimap;entries()Ljava/util/Collection;"))
     private Collection<Map.Entry<Attribute, AttributeModifier>> entries(Multimap<Attribute, AttributeModifier> instance) {
-        if (ForgeRegistries.ITEMS.getKey(((ItemStack) (Object) this).getItem()).equals(new ResourceLocation("metalworks:copper_pickaxe")))
+        if (FermionConfig.CLIENT.damageBlacklist.get().contains(ForgeRegistries.ITEMS.getKey(((ItemStack) (Object) this).getItem()))
             return new ArrayList<>();
 
         return instance.entries();
