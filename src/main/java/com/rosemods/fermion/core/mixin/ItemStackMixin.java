@@ -2,6 +2,7 @@ package com.rosemods.fermion.core.mixin;
 
 import com.google.common.collect.Multimap;
 import com.rosemods.fermion.core.FermionConfig;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.DiggerItem;
@@ -16,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 
 @Mixin(ItemStack.class)
@@ -32,6 +35,7 @@ public abstract class ItemStackMixin {
             info.cancel();
     }
 
+    /*
     @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Multimap;isEmpty()Z"))
     private boolean isEmpty(Multimap<Attribute, AttributeModifier> instance) {
         double i = 0;
@@ -40,6 +44,15 @@ public abstract class ItemStackMixin {
             i += entry.getValue().getAmount();
 
         return i == 0 || instance.isEmpty();
+    }
+    */
+
+    @Redirect(method = "getTooltipLines", at = @At(value = "INVOKE", target = "Lcom/google/common/collect/Multimap;entries()Ljava/util/Collection;"))
+    private Collection<Map.Entry<Attribute, AttributeModifier>> entries(Multimap<Attribute, AttributeModifier> instance) {
+        if (ForgeRegistries.ITEMS.getKey(((ItemStack) (Object) this).getItem()).equals(new ResourceLocation("metalworks:copper_pickaxe")))
+            return new ArrayList<>();
+
+        return instance.entries();
     }
 
 }

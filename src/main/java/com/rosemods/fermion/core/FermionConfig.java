@@ -101,6 +101,7 @@ public class FermionConfig {
         public final ConfigValue<Boolean> musicDiscTooltip;
         public final ConfigValue<Boolean> pickaxeMiningPower;
         public final ConfigValue<Boolean> toolMiningSpeed;
+        public final ConfigValue<List<? extends String>> damageBlacklist;
         public final ConfigValue<List<? extends String>> customTooltips;
         public final ConfigValue<Boolean> hiddenItemTooltip;
 
@@ -115,6 +116,7 @@ public class FermionConfig {
             this.musicDiscTooltip = builder.comment("Appends the Tooltip of a Music Disc to also display the Length of the Song").define("Music Disc Tooltip", true);
             this.pickaxeMiningPower = builder.comment("Displays the Mining Level of the Pickaxe as a Percentage").define("Pickaxe Mining Power", true);
             this.toolMiningSpeed = builder.comment("Displays the Mining Speed of the Tool").define("Tool Mining Speed", true);
+            this.damageBlacklist = builder.comment("List of items to hide the Attack Damage & Attack Speed Tooltips for.").define("Hide Damage & Speed", Lists.newArrayList());
             this.customTooltips = builder.comment("Items In this list will have a custom tooltip you will have to add a translation for").define("Custom Tooltip List", Lists.newArrayList());
             this.hiddenItemTooltip = builder.comment("If Items hidden with fermion should contain a tooltip displaying that the item is hidden.").define("Hidden Item Tooltip", true);
             builder.pop();
